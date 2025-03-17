@@ -657,4 +657,16 @@ window.addEventListener('DOMContentLoaded', function() {
       this.parentElement.classList.toggle("active");
     });
   });
-});
+    // Open all dropdowns by default
+    document.querySelectorAll(".dropdown").forEach(function(dropdown) {
+      dropdown.classList.add("active");
+    });
+  
+    // Attach click event listeners for toggling dropdowns
+    document.querySelectorAll(".dropdown-btn").forEach(function(btn) {
+      btn.addEventListener("click", function(e) {
+        e.preventDefault();
+        this.parentElement.classList.toggle("active");
+      });
+    });
+  });
