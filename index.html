@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Field Training Program</title>
+  <!-- Fonts, CSS, etc. -->
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+</head>
+
+<body class="background">
+  <!-- ======== LEFT SIDEBAR ======== -->
+  <div class="sidebar">
+    <!-- Sidebar image placeholder -->
+    <img src="images/ftologo.png" alt="Sidebar Placeholder" class="sidebar-image">
+    
+    <!-- Officer Details Input Form -->
+    <div class="officer-inputs">
+      <form id="officerForm">
+        <div id="nameAndSerial">
+          <input type="text" id="officerName" placeholder="Officer Name" required>
+          <input type="text" id="serialNumber" placeholder="Serial Number" required>
+        </div>
+        <!-- Added FTP Time input field -->
+        <input type="text" id="ftpTime" placeholder="FTP Time (HH:MM)" required>
+        <input type="url" id="ftoUrl" placeholder="FTO File URL" required>
+        <button type="submit" id="formButton">SUBMIT</button>
+      </form>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropdown-btn">Guided Patrols</button>
+      <div class="dropdown-content"></div>
+    </div>
+    <div class="dropdown">
+      <button class="dropdown-btn">Sit-in's</button>
+      <div class="dropdown-content"></div>
+    </div>
+  </div>
+
+  <!-- ======== MAIN CONTENT ======== -->
+  <div id="mainContent">
+    <!-- Top Logo -->
+    <img src="images/ftplogo.png" class="ftplogo" />
+
+    <div class="prdcontainer">
+      <h1>FIELD TRAINING PROGRAM</h1>
+      <div class="ftp-container">
+        <!-- Orientation Report button -->
+        <a href="#" class="image-button" id="orientationButton">
+          <img src="images/orientation.png" alt="Orientation">
+          <p>Orientation Report</p>
+        </a>
+        <!-- Daily Observation Report button opens the new DOR form -->
+        <a href="#" class="image-button" id="dorButton">
+          <img src="images/dor.png" alt="DOR">
+          <p>Daily Observation Report</p>
+        </a>
+        <a href="page11.html" class="image-button">
+          <img src="images/fto-record.png" alt="FTO Record">
+          <p>FTO Record</p>
+        </a>
+        <a href="page12.html" class="image-button">
+          <img src="images/fto-monthly.png" alt="FTO Monthly">
+          <p>FTO Monthly Record</p>
+        </a>
+        <a href="page13.html" class="image-button">
+          <img src="images/weeklymeeting.png" alt="Weekly Meeting">
+          <p>Weekly Evaluation Report (FTM USE)</p>
+        </a>
+        <a href="page14.html" class="image-button">
+          <img src="images/sit-in.png" alt="Sit In">
+          <p>Sit-in (FTM USE)</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== ORIENTATION GENERATOR ======== -->
+  <div id="orientationGenerator" style="display: none;">
+    <!-- Back button -->
+    <button class="orientation-back-button" id="backButton">Back</button>
+    
+    <div class="container orientation-container">
+      <h1>Orientation Generator</h1>
+      <!-- Orientation Generator Form -->
+      <form id="orientationForm" onsubmit="generateOrientationBBCode(); return false;">
+        <div class="header-info-grid">
+          <!-- Left Column: Officer Information -->
+          <div class="header-inputs">
+            <label for="oriOfficer">Probationary Police Officer:</label>
+            <input type="text" id="oriOfficer" placeholder="Enter officer name" required>
+            
+            <label for="oriOfficerSerial">Officer Serial Number:</label>
+            <input type="text" id="oriOfficerSerial" placeholder="Enter serial number" required>
+            
+            <label for="oriFTO">Field Training Officer:</label>
+            <input type="text" id="oriFTO" placeholder="Enter FTO name" required>
+            
+            <label for="oriFTOSerial">FTO Serial Number:</label>
+            <input type="text" id="oriFTOSerial" placeholder="Enter FTO serial" required>
+            
+            <label for="oriPatrolNumber">Patrol Number:</label>
+            <input type="text" id="oriPatrolNumber" placeholder="Enter patrol number" required>
+            
+            <label for="oriDate">Date:</label>
+            <input type="text" id="oriDate" placeholder="Enter date" required>
+            
+            <label for="oriTime">Time:</label>
+            <input type="text" id="oriTime" placeholder="Enter time" required>
+            
+            <label for="oriDuration">Duration:</label>
+            <input type="text" id="oriDuration" placeholder="Enter duration" required>
+          </div>
+          
+          <!-- Right Column: Incidents/Tasks -->
+          <div class="header-tasks">
+            <label for="oriIncidentsTasks">Incidents/Tasks:</label>
+            <textarea id="oriIncidentsTasks" placeholder="Enter Incidents/Tasks here..."></textarea>
+          </div>
+        </div>
+        
+        <!-- Orientation Checklist -->
+        <h2>Orientation Topics</h2>
+        <div class="buttons-grid">
+          <div class="checklist-item">
+            <label for="oriToggle1">1. Probationer's Divisional Notebook Created</label>
+            <div>
+              <input type="checkbox" id="oriToggle1">
+              <label for="oriToggle1" class="check-completed">COMPLETED</label>
+            </div>
+          </div>
+          <!-- Additional orientation checklist items... -->
+          <div class="checklist-item">
+            <label for="oriToggle2">3. Uniform and Equipment Checks</label>
+            <div>
+              <input type="checkbox" id="oriToggle2">
+              <label for="oriToggle2" class="check-completed">COMPLETED</label>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <label for="oriToggle3">4. Mission Row Familiarization</label>
+            <div>
+              <input type="checkbox" id="oriToggle3">
+              <label for="oriToggle3" class="check-completed">COMPLETED</label>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <label for="oriToggle4">5. Radio Setup</label>
+            <div>
+              <input type="checkbox" id="oriToggle4">
+              <label for="oriToggle4" class="check-completed">COMPLETED</label>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <label for="oriToggle5">6. Vehicle Checks (ELS, Maintenance Forms etc.)</label>
+            <div>
+              <input type="checkbox" id="oriToggle5">
+              <label for="oriToggle5" class="check-completed">COMPLETED</label>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <label for="oriToggle6">7. Teamspeak Binds (Central / TACs)</label>
+            <div>
+              <input type="checkbox" id="oriToggle6">
+              <label for="oriToggle6" class="check-completed">COMPLETED</label>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <label for="oriToggle7">8. Vehicle Spawning</label>
+            <div>
+              <input type="checkbox" id="oriToggle7">
+              <label for="oriToggle7" class="check-completed">COMPLETED</label>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <label for="oriToggle8">9. General Faction Commands</label>
+            <div>
+              <input type="checkbox" id="oriToggle8">
+              <label for="oriToggle8" class="check-completed">COMPLETED</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="button-row">
+          <button type="submit">Generate Orientation BBCode</button>
+          <button type="button" id="newOrientationReport">New Report</button>
+        </div>
+      </form>
+
+      <h2>Generated BBCode</h2>
+      <pre id="oriBBCodeOutput"></pre>
+    </div>
+  </div>
+
+  <!-- ======== DAILY OBSERVATION REPORT GENERATOR ======== -->
+  <div id="dorGenerator" style="display: none;">
+    <!-- Back button -->
+    <button class="orientation-back-button" id="dorBackButton">Back</button>
+    
+    <div class="container orientation-container">
+      <h1>Daily Observation Report</h1>
+      <!-- DOR Form -->
+      <form id="dorForm" onsubmit="generateDORBBCode(); return false;">
+        <div class="header-info-grid">
+          <!-- Left Column: Input Fields -->
+          <div class="header-inputs">
+            <label for="dorOfficer">Probationary Police Officer:</label>
+            <input type="text" id="dorOfficer" placeholder="ANSWER" required>
+            
+            <label for="dorOfficerSerial">Serial No.:</label>
+            <input type="text" id="dorOfficerSerial" placeholder="ANSWER" required>
+            
+            <label for="dorFTO">Field Training Officer:</label>
+            <input type="text" id="dorFTO" placeholder="ANSWER" required>
+            
+            <label for="dorFTOSerial">FTO Serial No.:</label>
+            <input type="text" id="dorFTOSerial" placeholder="ANSWER" required>
+            
+            <label for="dorPatrolNumber">Patrol Number:</label>
+            <input type="text" id="dorPatrolNumber" placeholder="ANSWER" required>
+            
+            <label for="dorDate">Date:</label>
+            <input type="text" id="dorDate" placeholder="ANSWER" required>
+            
+            <label for="dorTime">Time:</label>
+            <input type="text" id="dorTime" placeholder="ANSWER" required>
+            
+            <label for="dorDuration">Duration:</label>
+            <input type="text" id="dorDuration" placeholder="ANSWER" required>
+          </div>
+          
+          <!-- Right Column: Incidents/Tasks -->
+          <div class="header-tasks">
+            <label for="dorIncidentsTasks">Incidents/Tasks:</label>
+            <textarea id="dorIncidentsTasks" placeholder="ANSWER"></textarea>
+          </div>
+        </div>
+        
+        <!-- New Evaluation Section: Evaluation Grid -->
+        <h2>Evaluation Categories</h2>
+        <div class="dor-eval-grid">
+          <p class="dor-evaltext">(1) <b><u>BELOW STANDARD</u></b> - The behavior demonstrates an inability to accomplish required tasks.
+            <br><br>
+            (2) <b><u>IMPROVEMENT REQUIRED</u></b> - Performance is progressing towards acceptable, but does not yet meet the agency's standard.
+            <br><br>
+            (3) <b><u>STANDARD</u></b> - The behavior demonstrates an adequate ability to accomplish required tasks.
+            <br><br>
+            (4) <b><u>ABOVE STANDARD</u></b> - The behavior demonstrates a more than adequate ability to accomplish required tasks.
+            <br><br>
+            (N/O) <b><u>NOT OBSERVED</u></b> - The behavior was not observed.</p>
+          <!-- Header Row -->
+          <div class="dor-eval-row dor-eval-header">
+            <div class="dor-eval-cell dor-eval-category"><p>Category</p></div>
+            <div class="dor-eval-cell"><p>1</p></div>
+            <div class="dor-eval-cell"><p>2</p></div>
+            <div class="dor-eval-cell"><p>3</p></div>
+            <div class="dor-eval-cell"><p>(N/O)</p></div>
+          </div>
+          <!-- Evaluation Row 1: General Appearance -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">1. General Appearance</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating1" id="dorRating1_1" value="1">
+              <label for="dorRating1_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating1" id="dorRating1_2" value="2">
+              <label for="dorRating1_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating1" id="dorRating1_3" value="3">
+              <label for="dorRating1_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating1" id="dorRating1_4" value="4">
+              <label for="dorRating1_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 2: Attitude towards the Job and Feedback -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">2. Attitude towards the Job and Feedback</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating2" id="dorRating2_1" value="1">
+              <label for="dorRating2_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating2" id="dorRating2_2" value="2">
+              <label for="dorRating2_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating2" id="dorRating2_3" value="3">
+              <label for="dorRating2_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating2" id="dorRating2_4" value="4">
+              <label for="dorRating2_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 3: Department Policies/Procedures -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">3. Department Policies/Procedures</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating3" id="dorRating3_1" value="1">
+              <label for="dorRating3_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating3" id="dorRating3_2" value="2">
+              <label for="dorRating3_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating3" id="dorRating3_3" value="3">
+              <label for="dorRating3_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating3" id="dorRating3_4" value="4">
+              <label for="dorRating3_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 4: Law, Penal Code, Search and Seizure -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">4. Law, Penal Code, Search and Seizure</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating4" id="dorRating4_1" value="1">
+              <label for="dorRating4_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating4" id="dorRating4_2" value="2">
+              <label for="dorRating4_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating4" id="dorRating4_3" value="3">
+              <label for="dorRating4_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating4" id="dorRating4_4" value="4">
+              <label for="dorRating4_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 5: Driving Skill: General -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">5. Driving Skill: General</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating5" id="dorRating5_1" value="1">
+              <label for="dorRating5_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating5" id="dorRating5_2" value="2">
+              <label for="dorRating5_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating5" id="dorRating5_3" value="3">
+              <label for="dorRating5_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating5" id="dorRating5_4" value="4">
+              <label for="dorRating5_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 6: Driving Skill: Orientation and Response Time to Calls -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">6. Driving Skill: Orientation and Response Time to Calls</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating6" id="dorRating6_1" value="1">
+              <label for="dorRating6_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating6" id="dorRating6_2" value="2">
+              <label for="dorRating6_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating6" id="dorRating6_3" value="3">
+              <label for="dorRating6_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating6" id="dorRating6_4" value="4">
+              <label for="dorRating6_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 7: Report Writing: Accuracy/Grammar/Organisation -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">7. Report Writing: Accuracy/Grammar/Organisation</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating7" id="dorRating7_1" value="1">
+              <label for="dorRating7_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating7" id="dorRating7_2" value="2">
+              <label for="dorRating7_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating7" id="dorRating7_3" value="3">
+              <label for="dorRating7_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating7" id="dorRating7_4" value="4">
+              <label for="dorRating7_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 8: Field Performance -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">8. Field Performance</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating8" id="dorRating8_1" value="1">
+              <label for="dorRating8_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating8" id="dorRating8_2" value="2">
+              <label for="dorRating8_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating8" id="dorRating8_3" value="3">
+              <label for="dorRating8_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating8" id="dorRating8_4" value="4">
+              <label for="dorRating8_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 9: Self-Initiated Field Activities -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">9. Self-Initiated Field Activities</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating9" id="dorRating9_1" value="1">
+              <label for="dorRating9_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating9" id="dorRating9_2" value="2">
+              <label for="dorRating9_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating9" id="dorRating9_3" value="3">
+              <label for="dorRating9_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating9" id="dorRating9_4" value="4">
+              <label for="dorRating9_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 10: Field Activities: Traffic Stop -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">10. Field Activities: Traffic Stop</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating10" id="dorRating10_1" value="1">
+              <label for="dorRating10_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating10" id="dorRating10_2" value="2">
+              <label for="dorRating10_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating10" id="dorRating10_3" value="3">
+              <label for="dorRating10_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating10" id="dorRating10_4" value="4">
+              <label for="dorRating10_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 11: Field Activities: Arrest Procedure -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">11. Field Activities: Arrest Procedure</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating11" id="dorRating11_1" value="1">
+              <label for="dorRating11_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating11" id="dorRating11_2" value="2">
+              <label for="dorRating11_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating11" id="dorRating11_3" value="3">
+              <label for="dorRating11_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating11" id="dorRating11_4" value="4">
+              <label for="dorRating11_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 12: Officer Safety Principles -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">12. Officer Safety Principles</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating12" id="dorRating12_1" value="1">
+              <label for="dorRating12_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating12" id="dorRating12_2" value="2">
+              <label for="dorRating12_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating12" id="dorRating12_3" value="3">
+              <label for="dorRating12_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating12" id="dorRating12_4" value="4">
+              <label for="dorRating12_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 13: Control of Conflict: Voice Command/Physical Skill -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">13. Control of Conflict: Voice Command/Physical Skill</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating13" id="dorRating13_1" value="1">
+              <label for="dorRating13_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating13" id="dorRating13_2" value="2">
+              <label for="dorRating13_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating13" id="dorRating13_3" value="3">
+              <label for="dorRating13_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating13" id="dorRating13_4" value="4">
+              <label for="dorRating13_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 14: Use of Common Sense and Good Judgement -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">14. Use of Common Sense and Good Judgement</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating14" id="dorRating14_1" value="1">
+              <label for="dorRating14_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating14" id="dorRating14_2" value="2">
+              <label for="dorRating14_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating14" id="dorRating14_3" value="3">
+              <label for="dorRating14_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating14" id="dorRating14_4" value="4">
+              <label for="dorRating14_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 15: Radio/MDC: Use of Mobile Data Computer -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">15. Radio/MDC: Use of Mobile Data Computer</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating15" id="dorRating15_1" value="1">
+              <label for="dorRating15_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating15" id="dorRating15_2" value="2">
+              <label for="dorRating15_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating15" id="dorRating15_3" value="3">
+              <label for="dorRating15_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating15" id="dorRating15_4" value="4">
+              <label for="dorRating15_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 16: Radio: Articulation of Transmissions -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">16. Radio: Articulation of Transmissions</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating16" id="dorRating16_1" value="1">
+              <label for="dorRating16_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating16" id="dorRating16_2" value="2">
+              <label for="dorRating16_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating16" id="dorRating16_3" value="3">
+              <label for="dorRating16_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating16" id="dorRating16_4" value="4">
+              <label for="dorRating16_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+          <!-- Evaluation Row 17: With Citizens/Employees in General -->
+          <div class="dor-eval-row">
+            <div class="dor-eval-cell dor-eval-category">17. With Citizens/Employees in General</div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating17" id="dorRating17_1" value="1">
+              <label for="dorRating17_1" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating17" id="dorRating17_2" value="2">
+              <label for="dorRating17_2" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating17" id="dorRating17_3" value="3">
+              <label for="dorRating17_3" class="dor-radio-label"></label>
+            </div>
+            <div class="dor-eval-cell">
+              <input type="radio" name="dorRating17" id="dorRating17_4" value="4">
+              <label for="dorRating17_4" class="dor-radio-label"></label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="button-row">
+          <button type="submit">Generate DOR BBCode</button>
+          <button type="button" id="newDORReport">New Report</button>
+        </div>
+      </form>
+
+      <h2>Generated BBCode</h2>
+      <pre id="dorBBCodeOutput"></pre>
+    </div>
+  </div>
+
+  <!-- ======== MODAL OVERLAY (if needed) ======== -->
+  <div id="modalOverlay" class="modal-overlay">
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Modal Image">
+    </div>
+  </div>
+
+  <!-- Include your existing script file -->
+  <script src="script/index.js"></script>
+</body>
+</html>

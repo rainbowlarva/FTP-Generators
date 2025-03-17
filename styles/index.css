@@ -1,0 +1,574 @@
+html, body {
+  width: 100%;
+  margin: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+.background {
+  background-image: linear-gradient(#2A2E33, #1F2226);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+}
+
+.prdcontainer {
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 5%;
+}
+
+/* Top logo */
+.prdcontainer img {
+  display: inline-block;
+  margin: 10px;
+}
+
+.ftplogo {
+  display: block;
+  margin: 20px auto; /* centers the image horizontally */
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
+
+/* Container boxes for each section */
+.ftp-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  border: 5px solid #32383E;
+  border-radius: 10px;
+  background-color: #3C4349;
+  box-shadow: 0 0 5px #000000;
+  width: fit-content;
+  max-width: 860px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+/* Grayscale + hover scale */
+.image-button {
+  filter: grayscale(100%);
+  text-align: center;
+  transform: translateY(0) scale(1);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.image-button img {
+  width: 200px;
+  height: 200px;
+  border: 2px solid black;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-button:hover img {
+  box-shadow: 0 0 16px black;
+  transform: translateY(-3px) scale(1.05);
+}
+
+.image-button p {
+  color: white;
+  white-space: normal;
+  max-width: 200px;
+  transition: color 0.3s ease;
+}
+
+.image-button:hover p {
+  color: #DBDBDB;
+}
+
+/* Headings */
+h1 {
+  color: #006D2E;
+  text-shadow: 2px 2px 2px black;
+}
+
+h2 {
+  color: #006D2E;
+}
+
+/* === SIDEBAR STYLES === */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #3C4349;
+  border-right: 5px solid #32383E;
+  box-shadow: 0 0 5px #000000;
+  box-sizing: border-box;
+  overflow-y: auto;
+  z-index: 9999;
+}
+
+body.background {
+  margin-left: 250px;
+}
+
+.sidebar-image {
+  width: 57%;
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+  padding-left: 23%;
+}
+
+.sidebar-text {
+  color: #A89D8F;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.dropdown {
+  margin-bottom: 10px;
+  position: relative;
+  width: 100%;
+}
+
+.dropdown-btn {
+  width: 100%;
+  background-color: #32383E;
+  color: #A89D8F;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-btn::after {
+  content: "\25BC";
+  font-size: 0.9rem;
+  color: #A89D8F;
+  margin-left: 5px;
+}
+
+.dropdown-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  background-color: #32383E;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+}
+
+.dropdown-content a {
+  display: block;
+  color: #fff;
+  padding: 8px 10px;
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #545B60;
+}
+
+.dropdown.active .dropdown-content {
+  max-height: 500px;
+  opacity: 1;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(60, 67, 73, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10002;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background-color: #3C4349;
+  padding: 10px;
+  border: 5px solid #32383E;
+  border-radius: 5px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+}
+
+.modal-content img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.modal-content img.zoomed {
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  cursor: zoom-out;
+}
+
+/* Officer Input Styles */
+.officer-inputs {
+  padding: 10px 0;
+  text-align: center;
+}
+
+.officer-inputs input {
+  width: 80%;
+  margin: 5px 0;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.officer-inputs button {
+  width: 85%;
+  margin-top: 8px;
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+  background-color: #006D2E;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.officer-inputs button:hover {
+  background-color: #005220;
+}
+
+/* Static Text Appearance */
+.static-text {
+  color: white;
+  font-size: 24px;
+}
+
+#serialNumberStatic {
+  font-size: 16px;
+}
+
+/* Orientation Generator Container */
+.orientation-container {
+  background-color: #2A2E33;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 8px;
+  color: white;
+}
+
+.orientation-back-button {
+  position: absolute;
+  left: 260px; /* Sidebar width (250px) + 10px margin */
+  top: 10px;
+  background-color: #006D2E;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Orientation Generator Form Styles */
+.orientation-container h1,
+.orientation-container h2 {
+  text-align: center;
+  color: white;
+}
+
+.orientation-container label {
+  font-size: 1rem;
+  color: white;
+  display: block;
+  margin-top: 10px;
+}
+
+.orientation-container input,
+.orientation-container textarea {
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #545454;
+  background-color: #5D6770;
+  border-radius: 5px;
+  color: white;
+}
+
+.orientation-container button {
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #006D2E;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.orientation-container button:hover {
+  background-color: #005220;
+}
+
+/* New Report Button styles */
+#newOrientationReport, #newDORReport {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#newOrientationReport:hover, #newDORReport:hover {
+  background-color: darkred;
+}
+
+/* Button row for clear and generate buttons */
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.button-row button {
+  width: 50%;
+}
+
+/* --- Updated Two-Column Header Information Layout --- */
+.header-info-grid {
+  display: flex;
+  gap: 5px;           /* Minimal gap between columns */
+  margin-bottom: 20px;
+  justify-content: flex-start;  /* Align the group to the left */
+}
+
+.header-inputs {
+  flex: 0 0 30%;      /* Left column takes 30% */
+  display: flex;
+  flex-direction: column;
+}
+
+.header-inputs label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.header-inputs input {
+  width: 90%;         /* Smaller input boxes within the left column */
+  padding: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #545454;
+  background-color: #5D6770;
+  border-radius: 5px;
+  color: white;
+}
+
+.header-tasks {
+  flex: 0 0 70%;      /* Right column takes 70% */
+  display: flex;
+  flex-direction: column;
+}
+
+.header-tasks label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.header-tasks textarea {
+  width: 95%;
+  padding: 8px;
+  resize: none;
+  min-height: 522px;
+  border: 1px solid #545454;
+  background-color: #5D6770;
+  border-radius: 5px;
+  color: white;
+}
+
+.buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  /* 4 columns per row forces 2 rows with 8 items */
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 98%;
+}
+
+/* Checklist Item Styles (applied to items in the grid) */
+.checklist-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5D6770;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.checklist-item label {
+  flex: 1;
+  margin: 0;
+}
+
+.checklist-item input[type="checkbox"] {
+  display: none;
+}
+
+.checklist-item label.check-completed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 2px solid #990000;
+  border-radius: 5px;
+  background-color: #990000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  user-select: none;
+  color: white;
+  text-align: center;
+}
+
+.checklist-item label.check-completed button:hover {
+  background-color: #005220;
+}
+
+.checklist-item input[type="checkbox"]:checked + label.check-completed {
+  background-color: #005220;
+  border-color: #005220;
+  color: white;
+}
+
+/* --- Existing Orientation Generator Miscellaneous --- */
+#orientationGenerator .orientation-container {
+  background-color: #2A2E33;
+  padding: 20px;
+  margin: 20px 0;
+  width: 100%;
+  max-width: none;
+  border-radius: 8px;
+  color: white;
+}
+
+#orientationGenerator {
+  width: calc(100% - 250px);
+  margin-left: 250px;  /* line it up beside the sidebar */
+  display: block;
+}
+
+.orientation-container {
+  width: 100%;
+  max-width: none;
+  margin: 20px auto;
+  background-color: #2A2E33;
+}
+
+/* DOR Evaluation Grid Layout */
+.dor-eval-grid {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.dor-eval-row {
+  display: table-row;
+  border-bottom: 1px solid #ccc;
+}
+
+.dor-eval-cell {
+  display: table-cell;
+  padding: 5px;
+  text-align: center;
+  vertical-align: middle;
+  height: 40px;
+  line-height: 40px;
+}
+
+.dor-eval-cell p {
+  font-size: 18px;
+  line-height: 1px;
+}
+
+.dor-eval-category {
+  text-align: left;
+  font-weight: 500;
+}
+
+/* Hide native radio buttons in DOR grid */
+.dor-eval-grid input[type="radio"] {
+  display: none;
+}
+
+/* Style the radio labels as square buttons */
+.dor-radio-label {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ccc;  /* subtle default outline */
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  line-height: 40px;
+  font-size: 1.1rem;
+  color: #006D2E;
+}
+
+.dor-eval-grid input[type="radio"]:checked + .dor-radio-label {
+  border-color: #006D2E;
+  background-color: #006D2E;
+  color: white;
+}
+
+.dor-evaltext {
+  color: white;
+  font-weight: 300;
+}
+
+.dor-evaltext b {
+  font-weight: bold;
+}
+
+/* New rule for FTO FILE LINK styling */
+#ftoUrlLink {
+  color: #0094FF;
+  font-size: 16px;
+}
