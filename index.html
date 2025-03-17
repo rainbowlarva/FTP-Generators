@@ -24,7 +24,7 @@
           <input type="text" id="serialNumber" placeholder="Serial Number" required>
         </div>
         <!-- Added FTP Time input field -->
-        <input type="text" id="ftpTime" placeholder="FTP Time (HH:MM)" required>
+        <input type="text" id="ftpTime" placeholder="Total FTP Time (HH:MM)" required>
         <input type="url" id="ftoUrl" placeholder="FTO File URL" required>
         <button type="submit" id="formButton">SUBMIT</button>
       </form>
@@ -91,19 +91,19 @@
           <!-- Left Column: Officer Information -->
           <div class="header-inputs">
             <label for="oriOfficer">Probationary Police Officer:</label>
-            <input type="text" id="oriOfficer" placeholder="Enter officer name" required>
+            <input type="text" id="oriOfficer" placeholder="ANSWER" required>
             
             <label for="oriOfficerSerial">Officer Serial Number:</label>
-            <input type="text" id="oriOfficerSerial" placeholder="Enter serial number" required>
+            <input type="text" id="oriOfficerSerial" placeholder="ANSWER" required>
             
             <label for="oriFTO">Field Training Officer:</label>
-            <input type="text" id="oriFTO" placeholder="Enter FTO name" required>
+            <input type="text" id="oriFTO" placeholder="ANSWER" required>
             
             <label for="oriFTOSerial">FTO Serial Number:</label>
-            <input type="text" id="oriFTOSerial" placeholder="Enter FTO serial" required>
+            <input type="text" id="oriFTOSerial" placeholder="ANSWER" required>
             
             <label for="oriPatrolNumber">Patrol Number:</label>
-            <input type="text" id="oriPatrolNumber" placeholder="Enter patrol number" required>
+            <input type="text" id="oriPatrolNumber" placeholder="ANSWER" required>
             
             <label for="oriDate">Date:</label>
             <input type="text" id="oriDate" placeholder="MUST be DD/MMM/YYYY format !!!" required>
@@ -191,7 +191,7 @@
       </form>
 
       <h2>Generated BBCode</h2>
-      <pre id="oriBBCodeOutput"></pre>
+      <textarea id="oriBBCodeOutput" readonly style="width: calc(100% - 250px); height: 300px; resize: none;"></textarea>       
     </div>
   </div>
 
@@ -223,13 +223,13 @@
             <input type="text" id="dorPatrolNumber" placeholder="ANSWER" required>
             
             <label for="dorDate">Date:</label>
-            <input type="text" id="dorDate" placeholder="ANSWER" required>
+            <input type="text" id="dorDate" placeholder="MUST be DD/MMM/YYYY format !!!" required>
             
             <label for="dorTime">Time:</label>
-            <input type="text" id="dorTime" placeholder="ANSWER" required>
+            <input type="text" id="dorTime" placeholder="MUST be HH:MM format !!!" required>
             
             <label for="dorDuration">Duration:</label>
-            <input type="text" id="dorDuration" placeholder="ANSWER" required>
+            <input type="text" id="dorDuration" placeholder="MUST be HH:MM format !!!" required>
           </div>
           
           <!-- Right Column: Incidents/Tasks -->
@@ -238,6 +238,23 @@
             <textarea id="dorIncidentsTasks" placeholder="ANSWER"></textarea>
           </div>
         </div>
+        
+        <!-- New Performance Sections -->
+        <div class="performance-sections" style="display: flex; gap: 20px; margin-bottom: 20px;">
+          <div style="flex: 1;">
+            <label for="dorBelowStandard">Below Standard Performance:</label>
+            <textarea id="dorBelowStandard" placeholder="Enter details for below standard performance..." style="resize: none; width: 100%; height: 300px; overflow-y: auto;"></textarea>
+          </div>
+          <div style="flex: 1;">
+            <label for="dorAboveStandard">Above Standard Performance:</label>
+            <textarea id="dorAboveStandard" placeholder="Enter details for above standard performance..." style="resize: none; width: 100%; height: 300px; overflow-y: auto;"></textarea>
+          </div>
+        </div>
+
+        <div class="roleplay-remarks" style="margin-bottom: 20px;">
+          <label for="dorRoleplayRemarks">Roleplay Remarks:</label>
+          <textarea id="dorRoleplayRemarks" placeholder="Enter roleplay remarks..." style="resize: none; width: 100%; height: 100px; overflow-y: auto;"></textarea>
+        </div>        
         
         <!-- New Evaluation Section: Evaluation Grid -->
         <h2>Evaluation Categories</h2>
@@ -608,7 +625,7 @@
       </form>
 
       <h2>Generated BBCode</h2>
-      <pre id="dorBBCodeOutput"></pre>
+      <textarea id="dorBBCodeOutput" readonly style="width: calc(100% - 250px); height: 300px; resize: none;"></textarea>      
     </div>
   </div>
 
