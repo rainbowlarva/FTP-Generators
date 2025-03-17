@@ -576,3 +576,11 @@ body.background {
   color: #0094FF;
   font-size: 16px;
 }
+
+.top-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-left: 260px; /* Align with the sidebar offset */
+}
