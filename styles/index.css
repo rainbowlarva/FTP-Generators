@@ -401,6 +401,10 @@ body.background {
   color: white;
 }
 
+.header-inputs input::placeholder {
+  color: #BFB9BB;
+}
+
 .header-tasks {
   flex: 0 0 70%;      /* Right column takes 70% */
   display: flex;
