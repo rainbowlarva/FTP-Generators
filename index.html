@@ -23,7 +23,6 @@
           <input type="text" id="officerName" placeholder="Officer Name" required>
           <input type="text" id="serialNumber" placeholder="Serial Number" required>
         </div>
-        <!-- Added FTP Time input field -->
         <input type="text" id="ftpTime" placeholder="Total FTP Time (HH:MM)" required>
         <input type="url" id="ftoUrl" placeholder="FTO File URL" required>
         <button type="submit" id="formButton">SUBMIT</button>
@@ -53,7 +52,6 @@
           <img src="images/orientation.png" alt="Orientation">
           <p>Orientation Report</p>
         </a>
-        <!-- Daily Observation Report button opens the new DOR form -->
         <a href="#" class="image-button" id="dorButton">
           <img src="images/dor.png" alt="DOR">
           <p>Daily Observation Report</p>
@@ -759,9 +757,8 @@
   <div class="container orientation-container">
     <h1>Weekly Evaluation Report Generator</h1>
     <form id="weeklyForm" onsubmit="generateWeeklyBBCode(); return false;">
-      <!-- Header & Discussion Grid -->
       <div class="weekly-header-grid">
-        <!-- Left Column: All Textboxes Stacked Vertically -->
+        <!-- Left Column -->
         <div class="left-column">
           <label for="weeklyOfficer">Probationary Police Officer:</label>
           <input type="text" id="weeklyOfficer" placeholder="Enter Officer Name" required>
@@ -779,8 +776,7 @@
           <textarea id="weeklyDiscussion" placeholder="Enter additional discussion here..." required style="width: 90%; height: 150px;"></textarea>
         </div>
 
-        <!-- Right Column: FTM Info and Dropdowns -->
-          <!-- Dropdown for Strengths Discussion -->
+        <!-- Right Column -->
           <div class="right-column">
           <div class="dropdown-selection">
             <label for="strengthsDiscussionStatus">Strengths Discussion:</label>
@@ -789,7 +785,6 @@
               <option value="I have discussed">I have discussed</option>
             </select>
           </div>
-          <!-- Dropdown for Weaknesses Discussion -->
             <label for="weaknessesDiscussionStatus">Weaknesses Discussion:</label>
             <select id="weaknessesDiscussionStatus">
               <option value="I have not discussed">I have not discussed</option>
@@ -1175,7 +1170,7 @@
   </div>
 </div>
 
-  <!-- ======== MODAL OVERLAY (if needed) ======== -->
+  <!-- ======== MODAL OVERLAY ======== -->
   <div id="modalOverlay" class="modal-overlay">
     <div class="modal-content">
       <img id="modalImage" src="" alt="Modal Image">
@@ -1183,7 +1178,6 @@
   </div>
 </div>
 
-  <!-- Include your existing script file -->
   <script src="script/index.js"></script>
 </body>
 </html>
