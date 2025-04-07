@@ -151,7 +151,7 @@ function generateDORBBCode() {
   const dorAboveStandard = document.getElementById('dorAboveStandard').value;
   const dorRoleplayRemarks = document.getElementById('dorRoleplayRemarks').value;
   
-  // build header using table2 (as in your template)
+  // build header
   let headerBBCode = "";
   headerBBCode += "[font=Arial][color=black]Page [u]1[/u] of [u]1[/u][/color][/font]\n";
   headerBBCode += "[hr][/hr]\n";
@@ -201,7 +201,7 @@ function generateDORBBCode() {
   performanceBBCode += "[font=Arial][b][size=110]ABOVE STANDARD PERFORMANCE[/size][/b][/font]\n\n";
   performanceBBCode += (dorAboveStandard ? dorAboveStandard : "Above standard performance details here") + "\n\n";
   
-  // Roleplay Remarks Section (full width, shorter box)
+  // Roleplay Remarks
   let roleplayBBCode = "";
   roleplayBBCode += "[font=Arial][b][size=110](( ROLEPLAY REMARKS ))[/size][/b][/font]\n\n";
   roleplayBBCode += "[ooc]" + (dorRoleplayRemarks ? dorRoleplayRemarks : "Remarks here") + "[/ooc]\n\n";
@@ -234,7 +234,6 @@ function generateDORBBCode() {
   let ratingIndex = 0;
   groups.forEach((group, groupIndex) => {
     if (groupIndex === 0) {
-      // For first group, output header row with rating column headings.
       evalTable += "[tr]\n";
       evalTable += "[td][font=Arial][b]" + group.title + "[/b][/font][/td]\n";
       evalTable += "[td][font=Arial][center][b]1[/b][/center][/font][/td]\n";
@@ -244,12 +243,10 @@ function generateDORBBCode() {
       evalTable += "[td][font=Arial][center][b]N/O[/b][/center][/font][/td]\n";
       evalTable += "[/tr]\n";
     } else {
-      // For subsequent groups, output a separator row with the group title spanning all columns.
       evalTable += "[tr]\n";
       evalTable += "[td colspan='6'][font=Arial][b]" + group.title + "[/b][/font][/td]\n";
       evalTable += "[/tr]\n";
     }
-    // Output each evaluation item for the group.
     group.items.forEach(item => {
       let ratingName = "dorRating" + (ratingIndex + 1);
       let selectedElem = document.querySelector('input[name="' + ratingName + '"]:checked');
@@ -297,7 +294,7 @@ function generateDORBBCode() {
 function getOrientationToken(radioName) {
   var selectedElem = document.querySelector('input[name="' + radioName + '"]:checked');
   var selectedValue = selectedElem ? selectedElem.value : "";
-  // In this scheme, value "1" means completed and "2" means not completed.
+  // 1 is complete, 2 is incomplete
   if (selectedValue === "1") {
     return { yes: "[cbc][/cbc]", no: "[cb][/cb]" };
   } else if (selectedValue === "2") {
@@ -371,7 +368,7 @@ function generateOrientationBBCode() {
   bbcode += "[td][font=Arial][center][b]✘[/b][/center][/font][/td]\n";
   bbcode += "[/tr]\n";
   
-  // Checklist item 1: Probationer's Divisional Notebook Created (radio group: oriRating1)
+  // Checklist item 1: Probationer's Divisional Notebook Created (radio group: oriRating1
   var t1 = getOrientationToken("oriRating1");
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial]1. Probationer's Divisional Notebook Created[/font][/td]\n";
@@ -500,8 +497,7 @@ function saveReport(formId, type) {
       incidents: document.getElementById("oriIncidentsTasks").value
     };
 
-    // Save the orientation checklist options (radio selections)
-    // Assuming there are 8 checklist items with radio groups "oriRating1" to "oriRating8"
+    // Save the orientation checklist options
     let oriRatings = {};
     for (let i = 1; i <= 8; i++) {
       let selectedRadio = document.querySelector('input[name="oriRating' + i + '"]:checked');
@@ -643,10 +639,8 @@ document.getElementById('weeklyReportButton').addEventListener('click', function
   hideAllSections();
   var storedOfficerName = localStorage.getItem("officerName") || "";
   var storedSerialNumber = localStorage.getItem("serialNumber") || "";
-  // Leave the probationary officer fields blank for manual input.
   document.getElementById("weeklyOfficer").value = "";
   document.getElementById("weeklyOfficerSerial").value = "";
-  // Prepopulate the Field Training Manager (FTM) fields with the stored FTO details.
   document.getElementById("weeklyFTM").value = storedOfficerName;
   document.getElementById("weeklyFTMSerial").value = storedSerialNumber;
   
@@ -666,7 +660,7 @@ document.getElementById('newWeeklyReport').addEventListener('click', function() 
   document.getElementById('weeklyOfficerSerial').value = "";
   document.getElementById('weeklyFTM').value = "";
   document.getElementById('weeklyFTMSerial').value = "";
-  // Clear checklist toggles (if any)
+  // Clear checklist
   document.getElementById('weeklyToggle1').checked = false;
   document.getElementById('weeklyToggle2').checked = false;
   document.getElementById('weeklyBBCodeOutput').value = "";
@@ -677,7 +671,7 @@ document.getElementById('remedialRequired').addEventListener('change', function(
   container.style.display = (this.value === 'Yes') ? 'block' : 'none';
 });
 
-// Generate Weekly BBCode function (including checklist)
+// Generate Weekly BBCode function
 function generateWeeklyBBCode() {
   e.preventDefault();
   // Retrieve form field values
@@ -724,7 +718,7 @@ function generateWeeklyBBCode() {
   }
   checklistBBCode += "[/list]\n\n";
   
-  // Evaluation instructions and table (hardcoded based on your weekly template)
+  // Evaluation instructions and table
   bbcode += checklistBBCode;
   
   bbcode += "[font=Arial]\n";
@@ -736,7 +730,7 @@ function generateWeeklyBBCode() {
   bbcode += "(4) [b][u]ABOVE STANDARD:[/u][/b] - The behavior demonstrates a more than adequate ability to accomplish required tasks.\n";
   bbcode += "(N/O) [b][u]NOT OBSERVED:[/u][/b] - The behavior was not observed.[/list]\n\n";
   
-  // Build the evaluation table (using a hardcoded layout)
+  // Build the evaluation table
   bbcode += "[table]\n";
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial][b]APPEARANCE[/b][/font][/td]\n";
@@ -747,8 +741,7 @@ function generateWeeklyBBCode() {
   bbcode += "[td][font=Arial][center][b]N/O[/b][/center][/font][/td]\n";
   bbcode += "[/tr]\n";
   
-  // (Continue with table rows for each evaluation category as in your original weekly template)
-  // Example for one row:
+  // (Continue with table rows for each evaluation category
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial]1. General Appearance[/td]\n";
   bbcode += "[td][center][cb][/cb][/center][/td]\n";
@@ -757,8 +750,6 @@ function generateWeeklyBBCode() {
   bbcode += "[td][center][cb][/cb][/center][/td]\n";
   bbcode += "[td][center][cb][/cb][/center][/td]\n";
   bbcode += "[/tr]\n";
-  
-  // (Repeat for other rows as necessary...)
   
   bbcode += "[/table]\n";
   
@@ -780,9 +771,6 @@ function generateWeeklyBBCode() {
   } catch (err) {
     console.error("Error copying text: ", err);
   }
-  
-  // Optionally: Save the report if you have a saveReport function
-  // saveReport("weeklyForm", "weekly");
 }
 
 window.addEventListener('DOMContentLoaded', function() {
