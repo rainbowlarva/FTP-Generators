@@ -31,7 +31,6 @@ a {
   padding-bottom: 5%;
 }
 
-/* Top logo */
 .prdcontainer img {
   display: inline-block;
   margin: 10px;
@@ -39,13 +38,12 @@ a {
 
 .ftplogo {
   display: block;
-  margin: 20px auto; /* centers the image horizontally */
+  margin: 20px auto;
   width: 300px;
   height: 300px;
   border-radius: 50%;
 }
 
-/* Container boxes for each section */
 .ftp-container {
   display: flex;
   flex-wrap: wrap;
@@ -61,7 +59,6 @@ a {
   padding: 20px;
 }
 
-/* Grayscale + hover scale */
 .image-button {
   filter: grayscale(100%);
   text-align: center;
@@ -93,7 +90,6 @@ a {
   color: #DBDBDB;
 }
 
-/* Headings */
 h1 {
   color: #009E3F;
   text-shadow: 2px 2px 2px black;
@@ -103,7 +99,6 @@ h2 {
   color: #006D2E;
 }
 
-/* === SIDEBAR STYLES === */
 .sidebar {
   position: fixed;
   left: 0;
@@ -193,7 +188,6 @@ body.background {
   opacity: 1;
 }
 
-/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -243,7 +237,6 @@ body.background {
   cursor: zoom-out;
 }
 
-/* Officer Input Styles */
 .officer-inputs {
   padding: 10px 0;
   text-align: center;
@@ -273,7 +266,6 @@ body.background {
   background-color: #005220;
 }
 
-/* Static Text Appearance */
 .static-text {
   color: white;
   font-size: 24px;
@@ -285,7 +277,7 @@ body.background {
 
 .orientation-back-button {
   position: absolute;
-  left: 260px; /* Sidebar width (250px) + 10px margin */
+  left: 260px;
   top: 10px;
   background-color: #006D2E;
   color: white;
@@ -296,7 +288,6 @@ body.background {
   font-size: 1rem;
 }
 
-/* Orientation Generator Form Styles */
 .orientation-container h1,
 .orientation-container h2 {
   text-align: center;
@@ -341,7 +332,6 @@ body.background {
   background-color: #005220;
 }
 
-/* New Report Button styles */
 #newOrientationReport, #newDORReport, #newWeeklyReport {
   padding: 10px;
   font-size: 1rem;
@@ -358,7 +348,6 @@ body.background {
   background-color: darkred;
 }
 
-/* Button row for clear and generate buttons */
 .button-row {
   display: flex;
   justify-content: center;
@@ -370,16 +359,15 @@ body.background {
   width: 50%;
 }
 
-/* --- Updated Two-Column Header Information Layout --- */
 .header-info-grid {
   display: flex;
-  gap: 5px;           /* Minimal gap between columns */
+  gap: 5px;
   margin-bottom: 20px;
-  justify-content: flex-start;  /* Align the group to the left */
+  justify-content: flex-start;
 }
 
 .header-inputs {
-  flex: 0 0 30%;      /* Left column takes 30% */
+  flex: 0 0 30%;   
   display: flex;
   flex-direction: column;
 }
@@ -391,7 +379,7 @@ body.background {
 }
 
 .header-inputs input {
-  width: 90%;         /* Smaller input boxes within the left column */
+  width: 90%;       
   padding: 6px;
   margin-bottom: 10px;
   border: 1px solid #545454;
@@ -405,7 +393,7 @@ body.background {
 }
 
 .header-tasks {
-  flex: 0 0 70%;      /* Right column takes 70% */
+  flex: 0 0 70%; 
   display: flex;
   flex-direction: column;
 }
@@ -429,13 +417,12 @@ body.background {
 
 .buttons-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);  /* 4 columns per row forces 2 rows with 8 items */
+  grid-template-columns: repeat(4, 1fr); 
   gap: 10px;
   margin-bottom: 20px;
   width: 98%;
 }
 
-/* Checklist Item Styles (applied to items in the grid) */
 .checklist-item {
   display: flex;
   justify-content: space-between;
@@ -480,7 +467,6 @@ body.background {
   color: white;
 }
 
-/* --- Existing Orientation Generator Miscellaneous --- */
 .orientation-container {
   background-color: #2A2E33;
   padding: 20px;
@@ -543,12 +529,10 @@ body.background {
   vertical-align: middle;
 }
 
-/* Hide native radio buttons in DOR grid */
 .ori-eval-grid input[type="radio"] {
   display: none;
 }
 
-/* Style the radio labels as square buttons */
 .ori-radio-label {
   display: inline-block;
   width: 100%;
@@ -567,7 +551,6 @@ body.background {
   color: white;
 }
 
-/* DOR Evaluation Grid Layout */
 .dor-eval-grid {
   display: table;
   width: 80%;
@@ -620,12 +603,10 @@ body.background {
   font-size: 16px;
 }
 
-/* Hide native radio buttons in DOR grid */
 .dor-eval-grid input[type="radio"] {
   display: none;
 }
 
-/* Style the radio labels as square buttons */
 .dor-radio-label {
   display: inline-block;
   width: 100%;
@@ -653,7 +634,6 @@ body.background {
   font-weight: bold;
 }
 
-/* New rule for FTO FILE LINK styling */
 #ftoUrlLink {
   color: #0094FF;
   font-size: 16px;
@@ -664,15 +644,14 @@ body.background {
   justify-content: flex-start;
   gap: 10px;
   margin-bottom: 10px;
-  padding-left: 260px; /* Align with the sidebar offset */
+  padding-left: 260px;
 }
 
-/* ===== Compact Weekly Evaluation Report Generator - Two-column Layout ===== */
 #weeklyGenerator {
   width: 100%;
   max-width: 900px;
-  margin: 50px auto;  /* centers the container horizontally */
-  display: none; /* hidden by default */
+  margin: 50px auto;
+  display: none;
   padding: 10px;
 }
 
@@ -693,7 +672,6 @@ body.background {
   margin: 5px 0;
 }
 
-/* Two-column header grid for officer info and discussions */
 .weekly-header-grid {
   display: flex;
   flex-wrap: wrap;
@@ -703,11 +681,10 @@ body.background {
 
 .weekly-header-grid .left-column,
 .weekly-header-grid .right-column {
-  flex: 1 1 45%; /* adjust percentages as needed */
+  flex: 1 1 45%;
   box-sizing: border-box;
 }
 
-/* Right column: discussion fields are stacked vertically */
 .weekly-header-grid .right-column label {
   margin-top: 10px;
 }
@@ -723,7 +700,6 @@ body.background {
   color: white;
 }
 
-/* Adjust form fields inside the weekly generator */
 #weeklyGenerator input,
 #weeklyGenerator textarea,
 #weeklyGenerator select {
@@ -736,7 +712,6 @@ body.background {
   color: white;
 }
 
-/* Lower the height of textareas in weekly generator */
 #weeklyGenerator textarea {
   resize: none;
   height: 80px;
@@ -749,7 +724,7 @@ body.background {
 .orientation-checklist-grid {
   display: table;
   width: 100%;
-  border-collapse: collapse; /* simulates table border collapse */
+  border-collapse: collapse;
   margin-bottom: 20px;
 }
 
@@ -765,12 +740,10 @@ body.background {
   vertical-align: middle;
 }
 
-/* Leftmost cell (label) aligned to the left */
 .orientation-checklist-label {
   text-align: left;
 }
 
-/* Optional: style for the radio labels */
 .orientation-radio-label {
   display: inline-block;
   width: 20px;
