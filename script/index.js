@@ -652,23 +652,13 @@ document.getElementById('weeklyReportButton').addEventListener('click', function
   const storedOfficerName = localStorage.getItem("officerName") || "";
   const storedSerialNumber = localStorage.getItem("serialNumber") || "";
 
-  const replacements = {
-    "ftpWeeklyOfficer": "",
-    "ftpWeeklySerial": "",
-    "ftpWeeklyManager": storedOfficerName,
-    "ftpWeeklyManagerSerial": storedSerialNumber
-  };
+  document.getElementById("weeklyOfficer").value = "";
+  document.getElementById("weeklyOfficerSerial").value = "";
+  document.getElementById("weeklyFTM").value = storedOfficerName;
+  document.getElementById("weeklyFTMSerial").value = storedSerialNumber;
 
-  for (const [id, value] of Object.entries(replacements)) {
-    const el = document.getElementById(id);
-    if (el) el.value = value;
-  }
-
-  const weeklySection = document.getElementById('weeklyGenerator');
-  if (weeklySection) {
-    weeklySection.style.display = 'block';
-    weeklySection.scrollIntoView({ behavior: 'smooth' });
-  }
+  document.getElementById('weeklyGenerator').style.display = 'block';
+  document.getElementById('weeklyGenerator').scrollIntoView({ behavior: 'smooth' });
 });
 
 document.getElementById('weeklyBackButton').addEventListener('click', function() {
