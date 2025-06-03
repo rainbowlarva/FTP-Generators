@@ -310,13 +310,13 @@ body.background {
   padding: 5px;
   margin-bottom: 10px;
   border: 1px solid #545454;
-  background-color: #595959;
+  background-color: #3F3F3F;
   border-radius: 5px;
   color: white;
 }
 
 
-#weeklyGenerateButton, #DORGenerateButton, #OrientationGenerateButton {
+#generateWeekly, #DORGenerateButton, #OrientationGenerateButton {
   padding: 10px;
   font-size: 1rem;
   background-color: #006D2E;
@@ -328,13 +328,13 @@ body.background {
   width: 100%;
 }
 
+#generateWeekly:hover, #DORGenerateButton:hover, #OrientationGenerateButton:Hover {
+  background-color: #005220;
+}
+
 #oriIncidentTasks {
   height: 300px;
   min-height: 300px;
-}
-
-#weeklyGenerateButton:hover, #DORGenerateButton:hover, #OrientationGenerateButton:Hover {
-  background-color: #005220;
 }
 
 #newOrientationReport, #newDORReport, #newWeeklyReport {
@@ -388,7 +388,7 @@ body.background {
   padding: 6px;
   margin-bottom: 10px;
   border: 1px solid #545454;
-  background-color: #595959;
+  background-color: #3F3F3F;
   border-radius: 5px;
   color: white;
 }
@@ -415,7 +415,7 @@ body.background {
   padding: 8px;
   resize: none;
   border: 1px solid #545454;
-  background-color: #595959;
+  background-color: #3F3F3F;
   border-radius: 5px;
   color: white;
 }
@@ -473,7 +473,7 @@ body.background {
 }
 
 .orientation-container {
-  background-color: #333333;
+  background-color: #262626;
   padding: 20px;
   margin: 20px 0;
   width: 100%;
@@ -882,4 +882,21 @@ body.background {
 
 .sidebar .dropdown-content a:hover {
   color: #51f1a4;
+}
+
+.weekly-performance-wrapper {
+  width: 600px;             /* Set desired width */
+  margin: 0 auto;           /* Center wrapper on page */
+  display: flex;
+  flex-direction: column;
+}
+
+.weekly-performance-wrapper label {
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.weekly-performance-wrapper select {
+  width: 100%;
 }

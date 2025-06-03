@@ -451,7 +451,9 @@ function saveReport(formId, type) {
       strengthsDiscussion: document.getElementById("strengthsDiscussionStatus").value,
       weaknessesDiscussion: document.getElementById("weaknessesDiscussionStatus").value,
       remedialRequired: document.getElementById("remedialRequired").value,
-      remedialDetails: document.getElementById("remedialDetails").value
+      remedialDetails: document.getElementById("remedialDetails").value,
+      performance: document.getElementById("weeklyPerformanceSelect").value
+
     };
     let weeklyRatings = {};
     for (let i = 1; i <= 17; i++) {
@@ -613,19 +615,60 @@ function loadReport(report) {
     document.getElementById('dorGenerator').style.display = 'block';
     document.getElementById('dorGenerator').scrollIntoView({ behavior: 'smooth' });
   }
+
+  else if (report.type === "weekly") {
+  document.getElementById("weeklyOfficer").value = report.data.officer;
+  document.getElementById("weeklyOfficerSerial").value = report.data.officerSerial;
+  document.getElementById("weeklyFTM").value = report.data.ftm;
+  document.getElementById("weeklyFTMSerial").value = report.data.ftmSerial;
+  document.getElementById("weeklyDiscussion").value = report.data.discussion || "";
+  document.getElementById("strengthsDiscussionStatus").value = report.data.strengthsDiscussion || "";
+  document.getElementById("weaknessesDiscussionStatus").value = report.data.weaknessesDiscussion || "";
+  document.getElementById("remedialRequired").value = report.data.remedialRequired || "";
+  document.getElementById("remedialDetails").value = report.data.remedialDetails || "";
+  document.getElementById("weeklyPerformanceSelect").value = report.data.performance || "Satisfactory";
+
+  const container = document.getElementById("remedialDetailsContainer");
+  container.style.display = (report.data.remedialRequired === "Yes") ? "block" : "none";
+
+  if (report.data.ratings) {
+    for (let i = 1; i <= 17; i++) {
+      let rating = report.data.ratings["weeklyRating" + i];
+      let radios = document.getElementsByName("weeklyRating" + i);
+      for (let j = 0; j < radios.length; j++) {
+        radios[j].checked = (radios[j].value === rating);
+      }
+    }
+  }
+
+  document.getElementById("weeklyGenerator").style.display = "block";
+  document.getElementById("weeklyGenerator").scrollIntoView({ behavior: "smooth" });
+}
 }
 
 document.getElementById('weeklyReportButton').addEventListener('click', function(e) {
   hideAllSections();
-  var storedOfficerName = localStorage.getItem("officerName") || "";
-  var storedSerialNumber = localStorage.getItem("serialNumber") || "";
-  document.getElementById("weeklyOfficer").value = "";
-  document.getElementById("weeklyOfficerSerial").value = "";
-  document.getElementById("weeklyFTM").value = storedOfficerName;
-  document.getElementById("weeklyFTMSerial").value = storedSerialNumber;
-  
-  document.getElementById('weeklyGenerator').style.display = 'block';
-  document.getElementById('weeklyGenerator').scrollIntoView({ behavior: 'smooth' });
+
+  const storedOfficerName = localStorage.getItem("officerName") || "";
+  const storedSerialNumber = localStorage.getItem("serialNumber") || "";
+
+  const replacements = {
+    "ftpWeeklyOfficer": "",
+    "ftpWeeklySerial": "",
+    "ftpWeeklyManager": storedOfficerName,
+    "ftpWeeklyManagerSerial": storedSerialNumber
+  };
+
+  for (const [id, value] of Object.entries(replacements)) {
+    const el = document.getElementById(id);
+    if (el) el.value = value;
+  }
+
+  const weeklySection = document.getElementById('weeklyGenerator');
+  if (weeklySection) {
+    weeklySection.style.display = 'block';
+    weeklySection.scrollIntoView({ behavior: 'smooth' });
+  }
 });
 
 document.getElementById('weeklyBackButton').addEventListener('click', function() {
@@ -659,6 +702,7 @@ function getRatingToken(selected, ratingOption) {
 
 function generateWeeklyBBCode(e) {
   if (e) e.preventDefault();
+  if (e) e.preventDefault();
   
   var weeklyOfficer = document.getElementById("weeklyOfficer").value;
   var weeklyOfficerSerial = document.getElementById("weeklyOfficerSerial").value;
@@ -685,16 +729,16 @@ function generateWeeklyBBCode(e) {
   headerBBCode += "[tdwidth=1,black,transparent,top,left,8,5]\n";
   headerBBCode += "[size=87]SERIAL NO.[/size]\n" + weeklyFTMSerial + "\n";
   headerBBCode += "[/tdwidth][/tr]\n";
-  headerBBCode += "[/table2]\n\n";
+  headerBBCode += "[/table2]\n";
   
   let evaluationBBCode = "";
   evaluationBBCode += "[font=Arial]\n";
   evaluationBBCode += "[b]RATING INSTRUCTIONS: Use the following scale to summarize the probationary police officer's performance throughout the week. A SPECIFIC comment MUST have been made on a Daily Observation Report during the week being reviewed if a rating of (1) BELOW STANDARD, (2) IMPROVEMENT REQUIRED, or (4) ABOVE STANDARD is given. Check NOT OBSERVED (N/O) if behavior is not observed throughout the week.[/b]\n";
-  evaluationBBCode += " [b][u]BELOW STANDARD:[/u][/b] - The behavior demonstrates an inability to accomplish required tasks.\n";
+  evaluationBBCode += "[list=none](1) [b][u]BELOW STANDARD:[/u][/b] - The behavior demonstrates an inability to accomplish required tasks.\n";
   evaluationBBCode += "(2) [b][u]IMPROVEMENT REQUIRED:[/u][/b] - Performance is progressing towards acceptable, but does not yet meet the agency's standard.\n";
   evaluationBBCode += "(3) [b][u]STANDARD:[/u][/b] - The behavior demonstrates an adequate ability to accomplish required tasks.\n";
   evaluationBBCode += "(4) [b][u]ABOVE STANDARD:[/u][/b] - The behavior demonstrates a more than adequate ability to accomplish required tasks.\n";
-  evaluationBBCode += "(N/O) [b][u]NOT OBSERVED:[/u][/b] - The behavior was not observed.[/list]\n";
+  evaluationBBCode += "((N/O) [b][u]NOT OBSERVED:[/u][/b] - The behavior was not observed.[/list]\n";
   
   evaluationBBCode += "[table]\n";
   evaluationBBCode += "[tr]\n";
@@ -720,7 +764,7 @@ function generateWeeklyBBCode(e) {
   evaluationBBCode += "[/tr]\n";
   
   evaluationBBCode += "[tr]\n";
-  evaluationBBCode += "[td][font=Arial]2. Attitude towards the Job and Feedback[/td]\n";
+  evaluationBBCode += "[td][font=Arial]2. Acceptance of Feedback[/td]\n";
   evaluationBBCode += "[td][center]" + getRatingToken(getSelectedValue("weeklyRating2"), "1") + "[/center][/td]\n";
   evaluationBBCode += "[td][center]" + getRatingToken(getSelectedValue("weeklyRating2"), "2") + "[/center][/td]\n";
   evaluationBBCode += "[td][center]" + getRatingToken(getSelectedValue("weeklyRating2"), "3") + "[/center][/td]\n";
@@ -795,12 +839,12 @@ function generateWeeklyBBCode(e) {
   evaluationBBCode += "[/tr]\n";
   evaluationBBCode += "[/table]\n";
 
-  let strengthsChoice = document.getElementById('strengthsDiscussionSelect').value; // "have" or "have not"
-  let weaknessesChoice = document.getElementById('weaknessesDiscussionSelect').value; // "have" or "have not"
-  let remedialChoice = document.getElementById('remedialTrainingSelect').value;        // "has" or "has not"
-  let remedialTrainingText = document.getElementById('remedialTrainingDetails').value.trim();
+  let strengthsChoice = document.getElementById('strengthsDiscussionStatus').value; // "have" or "have not"
+  let weaknessesChoice = document.getElementById('weaknessesDiscussionStatus').value; // "have" or "have not"
+  let remedialChoice = document.getElementById('remedialRequired').value;        // "has" or "has not"
+  let remedialTrainingText = document.getElementById('remedialDetails').value.trim();
   let remedialOutput = (remedialChoice === "has") ? (remedialTrainingText ? remedialTrainingText : "N/A") : "N/A";
-  let swsComments = document.getElementById('strengthsWeaknessesDiscussion').value.trim();
+  let swsComments = document.getElementById('weeklyDiscussion').value.trim();
   
   let performanceDiscussionBBCode = "";
   performanceDiscussionBBCode += "[table2=1,black,transparent,Arial]\n";
@@ -814,37 +858,40 @@ function generateWeeklyBBCode(e) {
   performanceDiscussionBBCode += "[list][*]" + remedialOutput + "[/list]\n";
   performanceDiscussionBBCode += "[b]Comments regarding significant strengths, weaknesses, and progress to date:[/b]\n";
   performanceDiscussionBBCode += "[list][*]" + swsComments + "[/list]\n";
-  performanceDiscussionBBCode += "[/td][/tr]\n";
+  performanceDiscussionBBCode += "[/tr]\n";
   performanceDiscussionBBCode += "[/table2]\n";
+
+    let fieldTrainer = document.getElementById('weeklyFTM').value.trim();
+  let signatureBBCode = "";
+  signatureBBCode += "[aligntable=left,30,0,0,0,0,0]\n";
+  signatureBBCode += "[table2=1,black,transparent,Arial]\n";
+  signatureBBCode += "[tr][tdwidth=1,black,transparent,top,left,100,5][size=87]SIGNATURE OF FIELD TRAINING MANAGER[/size]\n";
+  signatureBBCode += fieldTrainer + "[/tr]";
+  signatureBBCode += "[/aligntable]";
   
-  let weeklyPerfElem = document.querySelector('input[name="weeklyPerformance"]:checked');
-  let weeklyPerf = weeklyPerfElem ? weeklyPerfElem.value : "";
+  let weeklyPerf = document.getElementById("weeklyPerformanceSelect").value || "";
   let weeklyPerformanceBBCode = "";
   weeklyPerformanceBBCode += "[aligntable=right,0,0,0,0,0,0]\n";
-  weeklyPerformanceBBCode += "[center][font=Arial][size=110][b]Weekly Performance[/b][/center]\n";
-  weeklyPerformanceBBCode += "A continuation of an unsatisfactory weekly duty performance \nevaluation may lead to termination of employment with the\nLos Santos Police Department.\n\n";
+  weeklyPerformanceBBCode += "[center][font=Arial][size=110][b]Weekly Performance[/b][/center]";
+  weeklyPerformanceBBCode += "A continuation of an unsatisfactory weekly duty performance \nevaluation may lead to termination of employment with the\nLos Santos Police Department.\n";
   if (weeklyPerf === "Satisfactory") {
-    weeklyPerformanceBBCode += "[cbc] Satisfactory [/cbc][space=200][cb]Unsatisfactory[/cb]";
+    weeklyPerformanceBBCode += "[cbc][/cbc] Satisfactory [space=200][cb][/cb]Unsatisfactory";
   } else if (weeklyPerf === "Unsatisfactory") {
-    weeklyPerformanceBBCode += "[cb] Satisfactory [space=200][cbc]Unsatisfactory[/cbc]";
+    weeklyPerformanceBBCode += "[cb] Satisfactory [space=200][cbc][/cbc]Unsatisfactory";
   } else {
     weeklyPerformanceBBCode += "[cb] Satisfactory [space=200][cb]Unsatisfactory";
   }
   weeklyPerformanceBBCode += "[/aligntable]";
+
+signatureBBCode = signatureBBCode.trimEnd();
+
+let fullBBCode = headerBBCode + evaluationBBCode + performanceDiscussionBBCode + signatureBBCode + weeklyPerformanceBBCode;
   
-  let fieldTrainer = document.getElementById('weeklyFTM').value.trim();
-  let signatureBBCode = "";
-  signatureBBCode += "[aligntable=left,30,0,0,0,0,0]\n";
-  signatureBBCode += "[table2=1,black,transparent,Arial]\n";
-  signatureBBCode += "[tr][tdwidth=1,black,transparent,top,left,100,5][b]SIGNATURE OF FIELD TRAINING MANAGER[/b]\n";
-  signatureBBCode += fieldTrainer + "\n";
-  signatureBBCode += "[/td][/tr]\n";
-  signatureBBCode += "[/table2]\n";
-  signatureBBCode += "[/aligntable]\n";
   
-  let fullBBCode = headerBBCode + evaluationBBCode + performanceDiscussionBBCode + weeklyPerformanceBBCode + signatureBBCode;
-  
-  var outputElem = document.getElementById('weeklyBBCodeOutput');
+var outputElem = document.getElementById('weeklyBBCodeOutput');
+outputElem.value = fullBBCode;
+outputElem.select();
+var outputElem = document.getElementById('weeklyBBCodeOutput');
   outputElem.value = fullBBCode;
   outputElem.select();
   
@@ -864,6 +911,10 @@ function generateWeeklyBBCode(e) {
 
 
 window.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('generateWeekly').addEventListener('click', function(e) {
+    generateWeeklyBBCode(e);
+  });
+
   var officerName = localStorage.getItem("officerName");
   if(officerName) {
     var serialNumber = localStorage.getItem("serialNumber");
