@@ -1,22 +1,18 @@
-// Officer Form Button Click Handler
 document.getElementById('formButton').addEventListener('click', function(e) {
   e.preventDefault();
   var btn = this;
   
   if (btn.textContent.trim() === "SUBMIT") {
-    // retrieve input values
     var officerName = document.getElementById('officerName').value;
     var serialNumber = document.getElementById('serialNumber').value;
     var ftpTime = document.getElementById('ftpTime').value;
     var ftoUrl = document.getElementById('ftoUrl').value;
     
-    // save officer details to local storage
     localStorage.setItem("officerName", officerName);
     localStorage.setItem("serialNumber", serialNumber);
     localStorage.setItem("ftpTime", ftpTime);
     localStorage.setItem("ftoUrl", ftoUrl);
     
-    // replace the officer name and URL
     var nameAndSerialDiv = document.getElementById('nameAndSerial');
     nameAndSerialDiv.innerHTML =
       '<span id="officerNameStatic" class="static-text">' + officerName + '</span><br>' +
@@ -24,11 +20,9 @@ document.getElementById('formButton').addEventListener('click', function(e) {
       '<span id="ftpTimeStatic" class="static-text">FTP Time: ' + ftpTime + '</span><br>' +
       '<span style="display:block; margin-top:5px;"><a id="ftoUrlLink" class="static-text" href="' + ftoUrl + '" target="_blank" style="color:#0094FF;">FTO FILE LINK</a></span>';
     
-    // hide the input fields after submission
     document.getElementById('ftoUrl').style.display = 'none';
     document.getElementById('ftpTime').style.display = 'none';
     
-    // change the button from SUBMIT to EDIT
     btn.textContent = "EDIT";
   } else {
     var nameAndSerialDiv = document.getElementById('nameAndSerial');
@@ -39,7 +33,6 @@ document.getElementById('formButton').addEventListener('click', function(e) {
       '<input type="text" id="officerName" placeholder="Officer Name" required value="' + officerNameStatic + '">' +
       '<input type="text" id="serialNumber" placeholder="Serial Number" required value="' + serialNumberStatic + '">';
     
-    // show the FTO details input when EDIT is pressed
     document.getElementById('ftpTime').style.display = 'block';
     document.getElementById('ftoUrl').style.display = 'block';
     document.getElementById('ftpTime').value = localStorage.getItem("ftpTime") || "";
@@ -49,7 +42,6 @@ document.getElementById('formButton').addEventListener('click', function(e) {
   }
 });
 
-// orientation generator toggle
 document.getElementById('orientationButton').addEventListener('click', function(e) {
   e.preventDefault();
   hideAllSections();
@@ -61,7 +53,6 @@ document.getElementById('orientationButton').addEventListener('click', function(
   document.getElementById('orientationGenerator').scrollIntoView({ behavior: 'smooth' });
 });
 
-// DOR generator toggle
 document.getElementById('dorButton').addEventListener('click', function(e) {
   e.preventDefault();
   hideAllSections();
@@ -73,7 +64,6 @@ document.getElementById('dorButton').addEventListener('click', function(e) {
   document.getElementById('dorGenerator').scrollIntoView({ behavior: 'smooth' });
 });
 
-// back buttons
 document.getElementById('backButton').addEventListener('click', function() {
   hideAllSections();
   document.getElementById('mainContent').style.display = 'block';
@@ -83,7 +73,6 @@ document.getElementById('dorBackButton').addEventListener('click', function() {
   document.getElementById('mainContent').style.display = 'block';
 });
 
-// orientation clear button
 document.getElementById('newOrientationReport').addEventListener('click', function() {
   document.getElementById('oriOfficer').value = "";
   document.getElementById('oriOfficerSerial').value = "";
@@ -92,7 +81,6 @@ document.getElementById('newOrientationReport').addEventListener('click', functi
   document.getElementById('oriTime').value = "";
   document.getElementById('oriDuration').value = "";
   document.getElementById('oriIncidentsTasks').value = "";
-  // clear orientation checklist
   for (let i = 1; i <= 8; i++) {
     let radios = document.getElementsByName("oriRating" + i);
     for (let j = 0; j < radios.length; j++) {
@@ -102,7 +90,6 @@ document.getElementById('newOrientationReport').addEventListener('click', functi
   document.getElementById('oriBBCodeOutput').value = "";
 });
 
-// DOR clear button
 document.getElementById('newDORReport').addEventListener('click', function() {
   document.getElementById('dorOfficer').value = "";
   document.getElementById('dorOfficerSerial').value = "";
@@ -114,7 +101,6 @@ document.getElementById('newDORReport').addEventListener('click', function() {
   document.getElementById('dorBelowStandard').value = "";
   document.getElementById('dorAboveStandard').value = "";
   document.getElementById('dorRoleplayRemarks').value = "";
-  // clear DOR checklist
   for (let i = 1; i <= 17; i++) {
     let radios = document.getElementsByName("dorRating" + i);
     for (let j = 0; j < radios.length; j++) {
@@ -124,7 +110,6 @@ document.getElementById('newDORReport').addEventListener('click', function() {
   document.getElementById('dorBBCodeOutput').value = "";
 });
 
-// helper function to hide all sections
 function hideAllSections() {
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('orientationGenerator').style.display = 'none';
@@ -132,14 +117,11 @@ function hideAllSections() {
   document.getElementById('weeklyGenerator').style.display = 'none';
 }
 
-// token helper for evaluation ratings
 function getRatingToken(selected, ratingOption) {
   return (selected == ratingOption) ? "[cbc=][/cbc]" : "[cb=][/cb]";
 }
 
-// generate DOR BBCode function
 function generateDORBBCode() {
-  // retrieve DOR field values
   const dorOfficer = document.getElementById('dorOfficer').value;
   const dorOfficerSerial = document.getElementById('dorOfficerSerial').value;
   const dorFTO = document.getElementById('dorFTO').value;
@@ -153,7 +135,6 @@ function generateDORBBCode() {
   const dorAboveStandard = document.getElementById('dorAboveStandard').value;
   const dorRoleplayRemarks = document.getElementById('dorRoleplayRemarks').value;
   
-  // build header using table2
   let headerBBCode = "";
   headerBBCode += "[font=Arial][color=black]Page [u]1[/u] of [u]1[/u][/color][/font]\n";
   headerBBCode += "[hr][/hr]\n";
@@ -191,11 +172,9 @@ function generateDORBBCode() {
   headerBBCode += "[/tdwidth][/tr]\n";
   headerBBCode += "[/table2]\n\n";
   
-  // Incidents/Tasks section
   let incidentsBBCode = "[font=Arial][b][size=110]INCIDENTS/TASKS[/size][/b][/font]\n\n";
   incidentsBBCode += dorIncidentsTasks + "\n\n";
   
-  // Performance Sections
   let performanceBBCode = "";
   performanceBBCode += "[font=Arial][b][size=110]BELOW STANDARD PERFORMANCE[/size][/b][/font]\n\n";
   performanceBBCode += (dorBelowStandard ? dorBelowStandard : "Below standard performance details here") + "\n\n";
@@ -203,12 +182,10 @@ function generateDORBBCode() {
   performanceBBCode += "[font=Arial][b][size=110]ABOVE STANDARD PERFORMANCE[/size][/b][/font]\n\n";
   performanceBBCode += (dorAboveStandard ? dorAboveStandard : "Above standard performance details here") + "\n\n";
   
-  // Roleplay Remarks Section
   let roleplayBBCode = "";
   roleplayBBCode += "[font=Arial][b][size=110](( ROLEPLAY REMARKS ))[/size][/b][/font]\n\n";
   roleplayBBCode += "[ooc]" + (dorRoleplayRemarks ? dorRoleplayRemarks : "Remarks here") + "[/ooc]\n\n";
   
-  // Evaluation instructions block
   let evaluationInstructions = "";
   evaluationInstructions += "[font=Arial][b][size=110]EVALUATION CATEGORIES[/size][/b][/font]\n\n";
   evaluationInstructions += "[b]RATING INSTRUCTIONS: Use the following scale to rate the Probationary Officer's performance. A SPECIFIC comment MUST be made on the Daily Observation Report if a rating of (1) BELOW STANDARD, (2) IMPROVEMENT REQUIRED, or (4) ABOVE STANDARD is given. Check NOT OBSERVED (N/O) if behaviour is not observed.[/b]\n";
@@ -220,11 +197,9 @@ function generateDORBBCode() {
   evaluationInstructions += "(N/O) [b][u]NOT OBSERVED:[/u][/b] - The behavior was not observed.\n";
   evaluationInstructions += "[/list]\n\n";
   
-  // Dynamic Evaluation Categories
   let evalTable = "";
   evalTable += "[table]\n";
   
-  // Define groups and their items
   const groups = [
     { title: "APPEARANCE", items: [ "1. General Appearance" ] },
     { title: "ATTITUDE", items: [ "2. Attitude towards the Job and Feedback" ] },
@@ -249,7 +224,6 @@ function generateDORBBCode() {
       evalTable += "[td colspan='6'][font=Arial][b]" + group.title + "[/b][/font][/td]\n";
       evalTable += "[/tr]\n";
     }
-    // Output each evaluation item for the group.
     group.items.forEach(item => {
       let ratingName = "dorRating" + (ratingIndex + 1);
       let selectedElem = document.querySelector('input[name="' + ratingName + '"]:checked');
@@ -269,7 +243,6 @@ function generateDORBBCode() {
   
   let fullBBCode = headerBBCode + incidentsBBCode + performanceBBCode + roleplayBBCode + evaluationInstructions + evalTable;
   
-  // Set the generated BBCode into the DOR output textbox
   var outputElem = document.getElementById('dorBBCodeOutput');
   outputElem.value = fullBBCode;
   outputElem.select();
@@ -288,15 +261,12 @@ function generateDORBBCode() {
     console.error("Error copying text: ", err);
   }
   
-  // Save the DOR report
   saveReport("dorForm", "dor");
 }
 
-// Helper function for orientation checklist toggles
 function getOrientationToken(radioName) {
   var selectedElem = document.querySelector('input[name="' + radioName + '"]:checked');
   var selectedValue = selectedElem ? selectedElem.value : "";
-  // value "1" means completed and "2" means not completed.
   if (selectedValue === "1") {
     return { yes: "[cbc][/cbc]", no: "[cb][/cb]" };
   } else if (selectedValue === "2") {
@@ -307,7 +277,6 @@ function getOrientationToken(radioName) {
 }
 
 function generateOrientationBBCode() {
-  // Retrieve orientation form values
   var oriOfficer = document.getElementById('oriOfficer').value;
   var oriOfficerSerial = document.getElementById('oriOfficerSerial').value;
   var oriFTO = document.getElementById('oriFTO').value;
@@ -318,7 +287,6 @@ function generateOrientationBBCode() {
   var oriDuration = document.getElementById('oriDuration').value;
   var oriIncidentsTasks = document.getElementById('oriIncidentsTasks').value;
   
-  // Build header BBCode
   let bbcode = "";
   bbcode += "[font=Arial][color=black]Page [u]1[/u] of [u]1[/u][/color][/font]\n";
   bbcode += "[hr][/hr]\n";
@@ -356,18 +324,15 @@ function generateOrientationBBCode() {
   bbcode += "[/tdwidth][/tr]\n";
   bbcode += "[/table2]\n\n";
   
-  // Orientation Checklist section
   bbcode += "[font=Arial][b][size=110]ORIENTATION CHECKLIST[/size][/b][/font]\n";
   bbcode += "[br][/br]";
   bbcode += "[table]\n";
-  // Header row for checklist
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial][b]ADMINISTRATIVE[/b][/font][/td]\n";
   bbcode += "[td][font=Arial][center][b]✓[/b][/center][/font][/td]\n";
   bbcode += "[td][font=Arial][center][b]✘[/b][/center][/font][/td]\n";
   bbcode += "[/tr]\n";
   
-  // Checklist item 1: Probationer's Divisional Notebook Created (radio group: oriRating1)
   var t1 = getOrientationToken("oriRating1");
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial]1. Probationer's Divisional Notebook Created[/font][/td]\n";
@@ -375,12 +340,10 @@ function generateOrientationBBCode() {
   bbcode += "[td][center]" + t1.no + "[/center][/td]\n";
   bbcode += "[/tr]\n";
   
-  // Separator for FIELD items
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial][b]FIELD[/b][/font][/td]\n";
   bbcode += "[/tr]\n";
   
-  // Checklist item 2: Uniform and Equipment Checks (radio group: oriRating2)
   var t2 = getOrientationToken("oriRating2");
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial]2. Uniform and Equipment Checks[/font][/td]\n";
@@ -388,7 +351,6 @@ function generateOrientationBBCode() {
   bbcode += "[td][center]" + t2.no + "[/center][/td]\n";
   bbcode += "[/tr]\n";
   
-  // Checklist item 3: Mission Row Familiarization (radio group: oriRating3)
   var t3 = getOrientationToken("oriRating3");
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial]3. Mission Row Familiarization[/font][/td]\n";
@@ -396,7 +358,6 @@ function generateOrientationBBCode() {
   bbcode += "[td][center]" + t3.no + "[/center][/td]\n";
   bbcode += "[/tr]\n";
   
-  // Checklist item 4: Radio Setup (radio group: oriRating4)
   var t4 = getOrientationToken("oriRating4");
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial]4. Radio Setup[/font][/td]\n";
@@ -404,7 +365,6 @@ function generateOrientationBBCode() {
   bbcode += "[td][center]" + t4.no + "[/center][/td]\n";
   bbcode += "[/tr]\n";
   
-  // Checklist item 5: Vehicle Checks (radio group: oriRating5)
   var t5 = getOrientationToken("oriRating5");
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial]5. Vehicle Checks (ELS, Maintenance Forms etc.)[/font][/td]\n";
@@ -412,12 +372,10 @@ function generateOrientationBBCode() {
   bbcode += "[td][center]" + t5.no + "[/center][/td]\n";
   bbcode += "[/tr]\n";
   
-  // Out-of-Character header
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial][ooc][b]OUT OF CHARACTER[/b][/ooc][/td]\n";
   bbcode += "[/tr]\n";
   
-  // Checklist item 6: Teamspeak Binds (radio group: oriRating6)
   var t6 = getOrientationToken("oriRating6");
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial]6. Teamspeak Binds (Central / TACs)[/font][/td]\n";
@@ -425,7 +383,6 @@ function generateOrientationBBCode() {
   bbcode += "[td][center]" + t6.no + "[/center][/td]\n";
   bbcode += "[/tr]\n";
   
-  // Checklist item 7: Vehicle Spawning (radio group: oriRating7)
   var t7 = getOrientationToken("oriRating7");
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial]7. Vehicle Spawning[/font][/td]\n";
@@ -433,7 +390,6 @@ function generateOrientationBBCode() {
   bbcode += "[td][center]" + t7.no + "[/center][/td]\n";
   bbcode += "[/tr]\n";
   
-  // Checklist item 8: General Faction Commands (radio group: oriRating8)
   var t8 = getOrientationToken("oriRating8");
   bbcode += "[tr]\n";
   bbcode += "[td][font=Arial]8. General Faction Commands[/font][/td]\n";
@@ -447,7 +403,6 @@ function generateOrientationBBCode() {
   bbcode += "[font=Arial][b][size=110]INCIDENTS/TASKS[/size][/b][/font]\n\n";
   bbcode += oriIncidentsTasks + "\n\n";
   
-  // Place the generated BBCode into the output textarea and copy to clipboard
   var outputElemOri = document.getElementById('oriBBCodeOutput');
   outputElemOri.value = bbcode;
   outputElemOri.select();
@@ -487,7 +442,6 @@ function saveReport(formId, type) {
   var report = { type: type, title: "", duration: "", data: {} };
 
   if (type === "weekly") {
-    // Save text fields and dropdown selections from the weekly form
     report.data = {
       officer: document.getElementById("weeklyOfficer").value,
       officerSerial: document.getElementById("weeklyOfficerSerial").value,
@@ -499,7 +453,6 @@ function saveReport(formId, type) {
       remedialRequired: document.getElementById("remedialRequired").value,
       remedialDetails: document.getElementById("remedialDetails").value
     };
-    // Save the weekly evaluation checklist options
     let weeklyRatings = {};
     for (let i = 1; i <= 17; i++) {
       let selectedRadio = document.querySelector('input[name="weeklyRating' + i + '"]:checked');
@@ -507,7 +460,6 @@ function saveReport(formId, type) {
     }
     report.data.ratings = weeklyRatings;
   } else if (type === "orientation") {
-    // Orientation report data
     report.data = {
       officer: document.getElementById("oriOfficer").value,
       officerSerial: document.getElementById("oriOfficerSerial").value,
@@ -519,7 +471,6 @@ function saveReport(formId, type) {
       duration: document.getElementById("oriDuration").value,
       incidents: document.getElementById("oriIncidentsTasks").value
     };
-    // Save the orientation checklist options
     let oriRatings = {};
     for (let i = 1; i <= 8; i++) {
       let selectedRadio = document.querySelector('input[name="oriRating' + i + '"]:checked');
@@ -527,7 +478,6 @@ function saveReport(formId, type) {
     }
     report.data.ratings = oriRatings;
   } else if (type === "dor") {
-    // DOR report data
     report.data = {
       officer: document.getElementById("dorOfficer").value,
       officerSerial: document.getElementById("dorOfficerSerial").value,
@@ -542,7 +492,6 @@ function saveReport(formId, type) {
       aboveStandard: document.getElementById("dorAboveStandard").value,
       roleplay: document.getElementById("dorRoleplayRemarks").value
     };
-    // Save the DOR evaluation radio selections
     let dorRatings = {};
     for (let i = 1; i <= 17; i++) {
       let sel = document.querySelector('input[name="dorRating' + i + '"]:checked');
@@ -551,11 +500,9 @@ function saveReport(formId, type) {
     report.data.ratings = dorRatings;
   }
   
-  // Create the report title from officer name, time and date
   report.title = report.data.officer + " - " + report.data.time + " - " + report.data.date;
   report.duration = report.data.duration;
   
-  // Retrieve existing saved reports and update or add the current report
   var savedReports = JSON.parse(localStorage.getItem("savedReports") || "[]");
   var existingIndex = savedReports.findIndex(r => r.title === report.title);
   
@@ -565,7 +512,6 @@ function saveReport(formId, type) {
     savedReports.push(report);
   }
   
-  // Only update FTP time for non-weekly reports.
   if (type !== "weekly") {
     var currentFTPTimeStr = localStorage.getItem("ftpTime") || "00:00";
     var currentFTPTimeMinutes = parseTimeToMinutes(currentFTPTimeStr);
@@ -595,16 +541,13 @@ function saveReport(formId, type) {
 function loadSavedReports() {
   var savedReports = JSON.parse(localStorage.getItem("savedReports") || "[]");
   
-  // Get the first dropdown (Guided Patrols) and second dropdown (Field Training Management)
   var dropdowns = document.querySelectorAll(".dropdown");
   var guidedPatrolsDiv = dropdowns[0].querySelector(".dropdown-content");
   var ftmDiv = dropdowns[1].querySelector(".dropdown-content");
   
-  // Clear both dropdowns
   guidedPatrolsDiv.innerHTML = "";
   ftmDiv.innerHTML = "";
   
-  // Add each report to the appropriate dropdown based on type
   savedReports.forEach(function(report) {
     var a = document.createElement("a");
     a.href = "#";
@@ -635,7 +578,6 @@ function loadReport(report) {
     document.getElementById("oriTime").value = report.data.time;
     document.getElementById("oriDuration").value = report.data.duration;
     document.getElementById("oriIncidentsTasks").value = report.data.incidents;
-    // Checklist toggles
     if(report.data.toggles) {
       for (let i = 1; i <= 8; i++) {
         let checkbox = document.getElementById("oriToggle" + i);
@@ -659,12 +601,10 @@ function loadReport(report) {
     document.getElementById("dorBelowStandard").value = report.data.belowStandard || "";
     document.getElementById("dorAboveStandard").value = report.data.aboveStandard || "";
     document.getElementById("dorRoleplayRemarks").value = report.data.roleplay || "";
-    // Restore DOR evaluation radio selections
     if(report.data.ratings) {
       for (let i = 1; i <= 17; i++) {
         let ratingValue = report.data.ratings["dorRating" + i];
         let radios = document.getElementsByName("dorRating" + i);
-        // Iterate over NodeList to set checked property
         for (let j = 0; j < radios.length; j++) {
           radios[j].checked = (radios[j].value === ratingValue);
         }
@@ -675,7 +615,6 @@ function loadReport(report) {
   }
 }
 
-// --- WEEKLY REPORT GENERATOR TOGGLE ---
 document.getElementById('weeklyReportButton').addEventListener('click', function(e) {
   hideAllSections();
   var storedOfficerName = localStorage.getItem("officerName") || "";
@@ -689,19 +628,16 @@ document.getElementById('weeklyReportButton').addEventListener('click', function
   document.getElementById('weeklyGenerator').scrollIntoView({ behavior: 'smooth' });
 });
 
-// Back button for Weekly Report
 document.getElementById('weeklyBackButton').addEventListener('click', function() {
   hideAllSections();
   document.getElementById('mainContent').style.display = 'block';
 });
 
-// Clear button for Weekly Report
 document.getElementById('newWeeklyReport').addEventListener('click', function() {
   document.getElementById('weeklyOfficer').value = "";
   document.getElementById('weeklyOfficerSerial').value = "";
   document.getElementById('weeklyFTM').value = "";
   document.getElementById('weeklyFTMSerial').value = "";
-  // Clear checklist toggles (if any)
   document.getElementById('weeklyToggle1').checked = false;
   document.getElementById('weeklyToggle2').checked = false;
   document.getElementById('weeklyBBCodeOutput').value = "";
@@ -724,13 +660,11 @@ function getRatingToken(selected, ratingOption) {
 function generateWeeklyBBCode(e) {
   if (e) e.preventDefault();
   
-  // Retrieve the weekly form values
   var weeklyOfficer = document.getElementById("weeklyOfficer").value;
   var weeklyOfficerSerial = document.getElementById("weeklyOfficerSerial").value;
   var weeklyFTM = document.getElementById("weeklyFTM").value;
   var weeklyFTMSerial = document.getElementById("weeklyFTMSerial").value;
   
-  // --- Build the Header Section ---
   let headerBBCode = "";
   headerBBCode += "[font=Arial][color=black]Page [u]1[/u] of [u]1[/u][/color][/font]\n";
   headerBBCode += "[hr][/hr]\n";
@@ -753,7 +687,6 @@ function generateWeeklyBBCode(e) {
   headerBBCode += "[/tdwidth][/tr]\n";
   headerBBCode += "[/table2]\n\n";
   
-  // --- Build the Evaluation Section ---
   let evaluationBBCode = "";
   evaluationBBCode += "[font=Arial]\n";
   evaluationBBCode += "[b]RATING INSTRUCTIONS: Use the following scale to summarize the probationary police officer's performance throughout the week. A SPECIFIC comment MUST have been made on a Daily Observation Report during the week being reviewed if a rating of (1) BELOW STANDARD, (2) IMPROVEMENT REQUIRED, or (4) ABOVE STANDARD is given. Check NOT OBSERVED (N/O) if behavior is not observed throughout the week.[/b]\n";
@@ -763,7 +696,6 @@ function generateWeeklyBBCode(e) {
   evaluationBBCode += "(4) [b][u]ABOVE STANDARD:[/u][/b] - The behavior demonstrates a more than adequate ability to accomplish required tasks.\n";
   evaluationBBCode += "(N/O) [b][u]NOT OBSERVED:[/u][/b] - The behavior was not observed.[/list]\n";
   
-  // Evaluation Grid
   evaluationBBCode += "[table]\n";
   evaluationBBCode += "[tr]\n";
   evaluationBBCode += "[td][font=Arial][b]APPEARANCE[/b][/td]\n";
@@ -885,7 +817,6 @@ function generateWeeklyBBCode(e) {
   performanceDiscussionBBCode += "[/td][/tr]\n";
   performanceDiscussionBBCode += "[/table2]\n";
   
-  // --- Weekly Performance Option Section ---
   let weeklyPerfElem = document.querySelector('input[name="weeklyPerformance"]:checked');
   let weeklyPerf = weeklyPerfElem ? weeklyPerfElem.value : "";
   let weeklyPerformanceBBCode = "";
@@ -901,7 +832,6 @@ function generateWeeklyBBCode(e) {
   }
   weeklyPerformanceBBCode += "[/aligntable]";
   
-  // --- Field Trainer Signature Section ---
   let fieldTrainer = document.getElementById('weeklyFTM').value.trim();
   let signatureBBCode = "";
   signatureBBCode += "[aligntable=left,30,0,0,0,0,0]\n";
@@ -914,12 +844,10 @@ function generateWeeklyBBCode(e) {
   
   let fullBBCode = headerBBCode + evaluationBBCode + performanceDiscussionBBCode + weeklyPerformanceBBCode + signatureBBCode;
   
-  // Output the final BBCode
   var outputElem = document.getElementById('weeklyBBCodeOutput');
   outputElem.value = fullBBCode;
   outputElem.select();
   
-  // Auto-copy the BBCode to clipboard
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(fullBBCode).then(() => {
       console.log("Weekly BBCode copied to clipboard.");
@@ -931,7 +859,6 @@ function generateWeeklyBBCode(e) {
     console.log("Weekly BBCode copied to clipboard (fallback).");
   }
   
-  // Save the weekly report
   saveReport("weeklyForm", "weekly");
 }
 
@@ -964,12 +891,10 @@ window.addEventListener('DOMContentLoaded', function() {
       this.parentElement.classList.toggle("active");
     });
   });
-    // Open all dropdowns by default
     document.querySelectorAll(".dropdown").forEach(function(dropdown) {
       dropdown.classList.add("active");
     });
   
-    // Attach click event listeners for toggling dropdowns
     document.querySelectorAll(".dropdown-btn").forEach(function(btn) {
       btn.addEventListener("click", function(e) {
         e.preventDefault();
