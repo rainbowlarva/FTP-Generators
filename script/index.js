@@ -899,6 +899,7 @@ var outputElem = document.getElementById('weeklyBBCodeOutput');
   saveReport("weeklyForm", "weekly");
 }
 
+
 window.addEventListener('DOMContentLoaded', function() {
   document.getElementById('generateWeekly').addEventListener('click', function(e) {
     generateWeeklyBBCode(e);
@@ -943,8 +944,8 @@ window.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-document.addEventListener('DOMContentLoaded', function () {
-  const dorButton = document.getElementById('generateDORReport');
+  document.addEventListener('DOMContentLoaded', function () {
+  const dorButton = document.getElementById('DORGenerateButton');
   if (dorButton) {
     dorButton.addEventListener('click', function(e) {
       e.preventDefault();
@@ -953,7 +954,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  const oriButton = document.getElementById('generateOrientationReport');
+  const oriButton = document.getElementById('OrientationGenerateButton');
   if (oriButton) {
     oriButton.addEventListener('click', function(e) {
       e.preventDefault();
