@@ -899,6 +899,19 @@ var outputElem = document.getElementById('weeklyBBCodeOutput');
   saveReport("weeklyForm", "weekly");
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('generateDORReport').addEventListener('click', function(e) {
+    e.preventDefault();
+    generateDORBBCode();
+    document.getElementById('dorBBCodeOutput').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.getElementById('generateOrientationReport').addEventListener('click', function(e) {
+    e.preventDefault();
+    generateOrientationBBCode();
+    document.getElementById('oriBBCodeOutput').scrollIntoView({ behavior: 'smooth' });
+  });
+});
 
 window.addEventListener('DOMContentLoaded', function() {
   document.getElementById('generateWeekly').addEventListener('click', function(e) {
