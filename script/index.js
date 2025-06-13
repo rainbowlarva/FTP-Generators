@@ -1,3 +1,5 @@
+import { animate, createTimer, createTimeline, createDraggable, onScroll, createScope, stagger } from 'animejs';
+
 document.getElementById('formButton').addEventListener('click', function(e) {
   e.preventDefault();
   var btn = this;
