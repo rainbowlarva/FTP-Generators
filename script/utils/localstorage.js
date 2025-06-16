@@ -1,4 +1,5 @@
-import { hideAllSections } from './ui.js';
+import { hideAllSections, populateStaticOfficerInfo } from './ui.js';
+import { monthlyLogs, renderMonthlyLogs } from "../generators/ftofile.js";
 
 export function parseTimeToMinutes(timeStr) {
   const parts = timeStr.split(':');
@@ -14,7 +15,7 @@ export function minutesToTimeStr(minutes) {
   return `${hours < 10 ? '0' : ''}${hours}:${mins < 10 ? '0' : ''}${mins}`;
 }
 
-export function saveReport(formId, type) {
+export function saveReport(type) {
   const report = {
     type,
     title: "",
@@ -57,6 +58,9 @@ export function saveReport(formId, type) {
       incidents: getValue("oriIncidentsTasks"),
       ratings: {}
     };
+
+     report.duration = report.data.duration;
+
     for (let i = 1; i <= 8; i++) {
       const selected = document.querySelector(`input[name="oriRating${i}"]:checked`);
       report.data.ratings[`oriRating${i}`] = selected ? selected.value : "";
@@ -79,11 +83,35 @@ export function saveReport(formId, type) {
       roleplay: getValue("dorRoleplayRemarks"),
       ratings: {}
     };
+
+    report.duration = report.data.duration;
+
     for (let i = 1; i <= 17; i++) {
       const selected = document.querySelector(`input[name="dorRating${i}"]:checked`);
       report.data.ratings[`dorRating${i}`] = selected ? selected.value : "";
     }
-  }
+  
+    } else if (type === "ftofile") {
+  report.data = {
+    name: getValue("ftoFileName"),
+    serial: getValue("ftoFileSerial"),
+    division: getValue("ftoFileDivision"),
+    time: getValue("ftoFileTime"),
+    logs: [...monthlyLogs]
+  };
+  
+  const date = new Date().toLocaleDateString('en-US');
+  report.title = `FTO File - ${report.data.name}`;
+  report.type = "ftofile";
+  localStorage.setItem("ftpTime", report.data.time);
+
+  const allReports = JSON.parse(localStorage.getItem("savedReports") || "[]");
+  const filtered = allReports.filter(r => r.type !== "ftofile");
+  filtered.push(report); // Use updated `report.title`
+  localStorage.setItem("savedReports", JSON.stringify(filtered));
+  loadSavedReports();
+  return;
+}
 
   if (type === "weekly") {
     report.title = `${report.data.officer} - ${report.data.date} - ${report.data.performance}`;
@@ -94,40 +122,54 @@ export function saveReport(formId, type) {
   const savedReports = JSON.parse(localStorage.getItem("savedReports") || "[]");
   const existingIndex = savedReports.findIndex(r => r.title === report.title);
 
+if (type !== "weekly") {
+  const currentTime = parseTimeToMinutes(localStorage.getItem("ftpTime") || "00:00");
+  const newDuration = parseTimeToMinutes(report.duration);
+
+  console.log("Saving report of type:", type);
+  console.log("Duration string:", report.duration);
+  console.log("Parsed duration:", newDuration);
+
+  let adjustedTime = currentTime;
   if (existingIndex >= 0) {
-    savedReports[existingIndex] = report;
+    const oldMinutes = parseTimeToMinutes(savedReports[existingIndex].duration);
+    console.log("Replacing old report with duration (min):", oldMinutes);
+    adjustedTime = adjustedTime - oldMinutes + newDuration;
   } else {
-    savedReports.push(report);
+    console.log("Adding new duration:", newDuration);
+    adjustedTime += newDuration;
   }
 
-  if (type !== "weekly") {
-    const currentTime = parseTimeToMinutes(localStorage.getItem("ftpTime") || "00:00");
-    const newDuration = parseTimeToMinutes(report.duration);
+  const newTimeStr = minutesToTimeStr(adjustedTime);
+  console.log("New FTP Time will be:", newTimeStr);
 
-    let adjustedTime = currentTime;
-    if (existingIndex >= 0) {
-      const oldMinutes = parseTimeToMinutes(savedReports[existingIndex].duration);
-      adjustedTime = adjustedTime - oldMinutes + newDuration;
-    } else {
-      adjustedTime += newDuration;
-    }
+  localStorage.setItem("ftpTime", newTimeStr);
+  const ftpDisplay = document.getElementById("ftpTimeStatic");
+  if (ftpDisplay) ftpDisplay.textContent = `FTP Time: ${newTimeStr}`;
+  populateStaticOfficerInfo();
 
-    const newTimeStr = minutesToTimeStr(adjustedTime);
-    localStorage.setItem("ftpTime", newTimeStr);
-    const ftpDisplay = document.getElementById("ftpTimeStatic");
-    if (ftpDisplay) ftpDisplay.textContent = `FTP Time: ${newTimeStr}`;
-  }
 
-  localStorage.setItem("savedReports", JSON.stringify(savedReports));
-  loadSavedReports();
+  if (existingIndex >= 0) {
+  savedReports[existingIndex] = report;
+} else {
+  savedReports.push(report);
+}
+
+}
+
+localStorage.setItem("savedReports", JSON.stringify(savedReports));
+loadSavedReports();
 }
 
 export function loadSavedReports() {
   const reports = JSON.parse(localStorage.getItem("savedReports") || "[]");
-  const dropdowns = document.querySelectorAll(".dropdown");
-  const guidedDiv = dropdowns[0].querySelector(".dropdown-content");
-  const ftmDiv = dropdowns[1].querySelector(".dropdown-content");
 
+  const dropdowns = document.querySelectorAll(".dropdown");
+  const ftoDiv = document.getElementById("ftoFileDropdown");
+  const guidedDiv = dropdowns[1].querySelector(".dropdown-content");
+  const ftmDiv = dropdowns[2].querySelector(".dropdown-content");
+
+  ftoDiv.innerHTML = "";
   guidedDiv.innerHTML = "";
   ftmDiv.innerHTML = "";
 
@@ -160,6 +202,8 @@ export function loadSavedReports() {
 
     if (report.type === "weekly") {
       ftmDiv.appendChild(wrapper);
+    } else if (report.type === "ftofile") {
+      ftoDiv.appendChild(wrapper);
     } else {
       guidedDiv.appendChild(wrapper);
     }
@@ -222,6 +266,18 @@ export function loadReport(report) {
     applyRating("weeklyRating", 17, report.data.ratings);
     document.getElementById("remedialDetailsContainer").style.display = (report.data.remedialRequired === "Yes") ? "block" : "none";
     document.getElementById("weeklyGenerator").style.display = "block";
+  
+  } else if (report.type === "ftofile") {
+    const currentTime = localStorage.getItem("ftpTime") || "00:00";
+
+    Object.assign(document.getElementById("ftoFileName"), { value: report.data.name });
+    Object.assign(document.getElementById("ftoFileSerial"), { value: report.data.serial });
+    Object.assign(document.getElementById("ftoFileDivision"), { value: report.data.division });
+    Object.assign(document.getElementById("ftoFileTime"), { value: currentTime });
+
+    monthlyLogs.splice(0, monthlyLogs.length, ...(report.data.logs || []));
+
+    document.getElementById("ftoFileGenerator").style.display = "block";
   }
 }
 
@@ -262,7 +318,6 @@ function subtractFromFtpTime(removedTime) {
 
   localStorage.setItem("ftpTime", newTime);
 
-  // Optionally update the UI display if needed
   const timeField = document.getElementById("ftpTime");
   if (timeField) timeField.value = newTime;
 

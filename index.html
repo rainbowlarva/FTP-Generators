@@ -30,6 +30,12 @@
      </button>
     </form>
    </div>
+    <div class="dropdown">
+      <button class="dropdown-btn">
+       FTO Files
+      </button>
+      <div class="dropdown-content" id="ftoFileDropdown"></div>
+    </div>
    <div class="dropdown">
     <button class="dropdown-btn">
      Guided Patrols
@@ -64,16 +70,14 @@
        Daily Observation Report
       </p>
      </a>
+      <a class="image-button" href="#" id="ftoFileButton">
+      <img alt="FTO File" src="images/fto-file.png" />
+      <p>FTO File</p>
+     </a>
      <a class="image-button" href="#" id="weeklyReportButton">
       <img alt="Weekly Meeting" src="images/weeklymeeting.png"/>
       <p>
        Weekly Report (FTM USE)
-      </p>
-     </a>
-     <a class="image-button" href="#">
-      <img alt="Sit In" src="images/sit-in.png"/>
-      <p>
-       DO NOT USE - INCOMPLETE
       </p>
      </a>
     </div>
@@ -1707,6 +1711,50 @@
    </h2>
    <textarea id="weeklyBBCodeOutput" readonly=""></textarea>
   </div>
+
+  <div id="ftoFileGenerator" class="container orientation-container" style="display: none;">
+    <button class="orientation-back-button" id="ftoFileBackButton">Back</button>
+    <h1>FTO File Generator</h1>
+    <p style="color:white; text-align:center; font-size: 1rem;">
+      Fill out the information below. Your name, serial, and FTP time are prefilled.
+    </p>
+    <p>If you already have an FTO file, submit the bbcode here</p>
+    <button type="button" id="submitMonthlyLogs" class="add-log-button mb-3">Submit</button>
+    <form id="ftofileForm">
+      <label>Field Training Officer Name</label>
+      <input id="ftoFileName" type="text" readonly />
+
+      <label>Serial Number</label>
+      <input id="ftoFileSerial" type="text" readonly />
+
+      <label>Division</label>
+      <input id="ftoFileDivision" type="text" placeholder="MISSION ROW/METRO" />
+
+      <label>Total Instruction Time</label>
+      <input id="ftoFileTime" type="text" readonly />
+    <h2>Monthly Logs</h2>
+    <p>Only fill in the date and duration for CAPS.</p>
+    <div id="monthlyLogInputsContainer" class="monthly-log-inputs"></div>
+
+<button id="addLogEntry" type="button" class="add-log-button">Add Log Entry</button>
+<button id="showAllLogs" type="button" class="add-log-button">Show All Months</button>
+
+    </form>
+
+    <div class="button-row">
+      <button id="generateFTOFile" type="button">
+        Generate BBCode
+      </button>
+      <button id="newFTOFileReport" type="button">
+        New Report
+      </button>
+    </div>
+
+    <h2>Generated BBCode</h2>
+    <textarea id="ftoFileBBCodeOutput" readonly style="width: calc(100% - 250px); height: 300px; resize: none;"></textarea>
+  </div>
+</div>
+
   <div class="modal-overlay" id="modalOverlay">
    <div class="modal-content">
     <img alt="Modal Image" id="modalImage" src=""/>

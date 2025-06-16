@@ -55,7 +55,6 @@ export function generateWeeklyBBCode() {
 
   bbcode += "[/table]\n\n";
 
-  // Discussion section
   bbcode += "[table2=1,black,transparent,Arial]\n";
   bbcode += "[tr][tdwidth=1,black,transparent,top,left,100,5][b]Performance Discussion:[/b]\n";
   bbcode += "[list]\n";
@@ -67,7 +66,6 @@ export function generateWeeklyBBCode() {
   bbcode += "[b]Comments:[/b]\n[list][*]" + (discussion || "N/A") + "[/list]\n";
   bbcode += "[/td][/tr][/table2]\n\n";
 
-  // Signature + Performance checkbox
   bbcode += `[aligntable=left,30,0,0,0,0,0][table2=1,black,transparent,Arial][tr][tdwidth=1,black,transparent,top,left,100,5][size=87]SIGNATURE OF FIELD TRAINING MANAGER[/size]\n${ftm}[/td][/tr][/table2][/aligntable]\n\n`;
 
   bbcode += "[aligntable=right,0,0,0,0,0,0][center][font=Arial][size=110][b]Weekly Performance[/b][/size][/font][/center]\n";
@@ -95,5 +93,5 @@ export function generateWeeklyBBCode() {
     console.error("Clipboard copy failed", err);
   }
 
-  saveReport("weeklyForm", "weekly");
+  saveReport("weekly");
 }

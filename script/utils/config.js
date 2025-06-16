@@ -1,11 +1,7 @@
-// utils/config.js
-
-// Orientation Ratings Count
 export const FTP_ORIENTATION_RATINGS_COUNT = 8;
 export const FTP_DOR_RATINGS_COUNT = 17;
 export const FTP_WEEKLY_RATINGS_COUNT = 17;
 
-// Discussion Dropdowns
 export const strengthsDiscussionOptions = [
   "I have discussed",
   "I have not discussed"
@@ -21,7 +17,6 @@ export const remedialTrainingOptions = [
   "No"
 ];
 
-// DOR and Weekly Evaluation Categories
 export const dorCategories = [
   {
     title: "APPEARANCE",

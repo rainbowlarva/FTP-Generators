@@ -1,19 +1,14 @@
-// utils/utils.js
-
 /**
- * Returns a BBCode checkbox token depending on whether the selected option matches the rating.
- * Used by DOR and Weekly generators.
- * @param {string} selected - Selected value
- * @param {string} ratingOption - Value to match against
- * @returns {string} BBCode checkbox
+ * @param {string} selected
+ * @param {string} ratingOption
+ * @returns {string}
  */
 export function getRatingToken(selected, ratingOption) {
   return selected === ratingOption ? "[cbc][/cbc]" : "[cb][/cb]";
 }
 
 /**
- * Retrieves the selected value from a radio button group
- * @param {string} groupName - Name attribute of the radio inputs
+ * @param {string} groupName
  * @returns {string} Selected radio value, or empty string
  */
 export function getSelectedValue(groupName) {
@@ -22,8 +17,7 @@ export function getSelectedValue(groupName) {
 }
 
 /**
- * For Orientation: Returns token object with [cbc] for yes, [cb] for no.
- * @param {string} radioName - Name of the orientation radio input group
+ * @param {string} radioName
  * @returns {{yes: string, no: string}}
  */
 export function getOrientationToken(radioName) {

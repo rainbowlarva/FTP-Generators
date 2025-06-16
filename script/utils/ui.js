@@ -1,34 +1,37 @@
+import { handleSidebarSaveEdit } from '../main.js';
+
 export function hideAllSections() {
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('orientationGenerator').style.display = 'none';
   document.getElementById('dorGenerator').style.display = 'none';
   document.getElementById('weeklyGenerator').style.display = 'none';
+  document.getElementById('ftoFileGenerator').style.display = 'none';
 }
 
 export function populateStaticOfficerInfo() {
-  const officerName = localStorage.getItem("officerName");
-  const serialNumber = localStorage.getItem("serialNumber");
-  const ftpTime = localStorage.getItem("ftpTime");
-  const ftoUrl = localStorage.getItem("ftoUrl") || "";
+  const form = document.getElementById("officerForm");
+  if (!form) return;
 
-  if (!officerName || !serialNumber) return;
+  const name = localStorage.getItem("officerName") || "";
+  const serial = localStorage.getItem("serialNumber") || "";
+  const rank = localStorage.getItem("officerRank") || "";
+  const time = localStorage.getItem("ftpTime") || "00:00";
+  const url = localStorage.getItem("ftoUrl") || "";
 
-  const nameAndSerialDiv = document.getElementById('nameAndSerial');
-  nameAndSerialDiv.innerHTML = `
-    <span id="officerNameStatic" class="static-text">${officerName}</span><br>
-    <span id="serialNumberStatic" class="static-text">#${serialNumber}</span><br>
-    <span id="ftpTimeStatic" class="static-text">FTP Time: ${ftpTime}</span><br>
-    <span style="display:block; margin-top:5px;">
-      <a id="ftoUrlLink" class="static-text" href="${ftoUrl}" target="_blank" style="color:#0094FF;">FTO FILE</a>
-    </span>
+  form.innerHTML = `
+    <div id="nameAndSerial">
+      <span id="officerNameStatic" class="static-text">${name}</span><br>
+      <span id="serialNumberStatic" class="static-text">#${serial}</span><br>
+      <span id="officerRankStatic" class="static-text">${rank}</span>
+    </div>
+    <div class="sidebar-static">
+      <span class="static-text" id="ftpTimeStatic">FTP Time: ${time}</span><br>
+      <a href="${url}" class="static-text" target="_blank" style="color:#0094FF;">FTO FILE</a>
+    </div>
+    <button id="formButton" type="submit">EDIT</button>
   `;
 
-  const ftpTimeElem = document.getElementById('ftpTime');
-  const ftoUrlElem = document.getElementById('ftoUrl');
-  if (ftpTimeElem) ftpTimeElem.style.display = 'none';
-  if (ftoUrlElem) ftoUrlElem.style.display = 'none';
-
-  document.getElementById('formButton').textContent = "EDIT";
+  document.getElementById("formButton")?.addEventListener("click", handleSidebarSaveEdit);
 }
 
 export function setupDropdowns() {

@@ -78,5 +78,5 @@ export function generateOrientationBBCode() {
     console.error("Clipboard copy failed", err);
   }
 
-  saveReport("orientationForm", "orientation");
+  saveReport("orientation");
 }

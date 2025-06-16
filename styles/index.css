@@ -317,7 +317,7 @@ body.background {
 }
 
 
-#generateWeekly, #DORGenerateButton, #OrientationGenerateButton {
+#generateWeekly, #DORGenerateButton, #OrientationGenerateButton, #generateFTOFile {
   padding: 10px;
   font-size: 1rem;
   background-color: #006D2E;
@@ -329,7 +329,7 @@ body.background {
   width: 100%;
 }
 
-#generateWeekly:hover, #DORGenerateButton:hover, #OrientationGenerateButton:Hover {
+#generateWeekly:hover, #DORGenerateButton:hover, #OrientationGenerateButton:Hover, #generateFTOFile:Hover {
   background-color: #005220;
 }
 
@@ -338,7 +338,7 @@ body.background {
   min-height: 300px;
 }
 
-#newOrientationReport, #newDORReport, #newWeeklyReport {
+#newOrientationReport, #newDORReport, #newWeeklyReport, #newFTOFileReport {
   padding: 10px;
   font-size: 1rem;
   background-color: red;
@@ -350,7 +350,7 @@ body.background {
   width: 100%;
 }
 
-#newOrientationReport:hover, #newDORReport:hover, #newWeeklyReport:hover {
+#newOrientationReport:hover, #newDORReport:hover, #newWeeklyReport:hover, #newFTOFileReport:hover {
   background-color: darkred;
 }
 
@@ -886,8 +886,8 @@ body.background {
 }
 
 .weekly-performance-wrapper {
-  width: 600px;             /* Set desired width */
-  margin: 0 auto;           /* Center wrapper on page */
+  width: 600px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
@@ -904,8 +904,8 @@ body.background {
 
 .report-entry {
   position: relative;
-  padding: 8px 12px 8px 10px;  /* Match .dropdown-content padding */
-  margin-right: 6px;           /* Pull trashcan in away from the edge */
+  padding: 8px 12px 8px 10px;
+  margin-right: 6px;
   background-color: transparent;
   display: block;
   color: #ccc;
@@ -945,4 +945,88 @@ body.background {
 .delete-report-btn:hover {
     box-shadow: 0 0 4px rgba(255, 79, 79, 0.4);
     color: #ff4f4f;
+}
+
+.log-input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+
+.log-input-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+}
+
+.hidden-label {
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.monthly-log-inputs .log-entry {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.monthly-log-inputs input {
+  flex: 1;
+}
+
+.log-entry select {
+  flex: 1 1 150px;
+  padding: 4px;
+}
+
+.log-entry .dropdown-select {
+  flex: 1 1 200px;
+  min-width: 160px;
+  background-color: #3F3F3F;
+  border: 1px solid #545454;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  font-family: inherit;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+.log-entry input[type="text"] {
+  flex: 1 1 200px;
+  min-width: 160px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #545454;
+  background-color: #3F3F3F;
+  color: white;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.add-log-button {
+  background-color: #2e2e2e;
+  border: 1px solid #545454;
+  color: white;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  height: 32px;
+}
+
+.add-log-button:hover {
+  background-color: #3f3f3f;
+}
+
+.mb-3 {
+  margin-bottom: 24px;
 }

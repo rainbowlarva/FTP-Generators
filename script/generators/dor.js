@@ -103,5 +103,5 @@ export function generateDORBBCode() {
     console.error("Clipboard copy failed", err);
   }
 
-  saveReport("dorForm", "dor");
+  saveReport("dor");
 }
