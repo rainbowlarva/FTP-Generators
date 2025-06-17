@@ -67,7 +67,7 @@ export function generateDORBBCode() {
 
   bbcode += "[table]\n";
   bbcode += "[tr][td][font=Arial][b]Category[/b][/font][/td]";
-  bbcode += "[td][center]1[/center][/td][td][center]2[/center][/td][td][center]3[/center][/td][td][center]4[/center][/td][td][center]N/O[/center][/td][/tr]\n";
+  bbcode += "[td][center][b]1[/b][/center][/td][td][center][b]2[/b][/center][/td][td][center][b]3[/b][/center][/td][td][center][b]4[/b][/center][/td][td][center][b]N/O[/b][/center][/td][/tr]\n";
 
   let ratingIndex = 1;
 
