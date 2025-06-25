@@ -48,7 +48,7 @@ export function generateDORBBCode() {
   bbcode += "[font=Arial][b][size=110]ABOVE STANDARD PERFORMANCE[/size][/b][/font]\n\n";
   bbcode += `${dorAboveStandard || "Above standard performance details here"}\n\n`;
 
-  bbcode += "[font=Arial][b][size=110]LEARNING GOALS:[/size][/b][/font]\n\n";
+  bbcode += "[font=Arial][b][size=110]LEARNING GOALS[/size][/b][/font]\n\n";
   bbcode += `${learningGoalsExplanation || "Explain what you taught here."}\n\n`;
 
   bbcode += "[font=Arial][b][size=110](( ROLEPLAY REMARKS ))[/size][/b][/font]\n\n";
