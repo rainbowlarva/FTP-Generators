@@ -64,9 +64,9 @@ export function generateWeeklyBBCode() {
   bbcode += "[/list]\n\n";
   bbcode += "[b]Remedial Details:[/b]\n[list][*]" + (remedial === "Yes" ? (remedialDetails || "N/A") : "N/A") + "[/list]\n";
   bbcode += "[b]Comments:[/b]\n[list][*]" + (discussion || "N/A") + "[/list]\n";
-  bbcode += "[/td][/tr][/table2]\n\n";
+  bbcode += "[/tr][/table2]\n\n";
 
-  bbcode += `[aligntable=left,30,0,0,0,0,0][table2=1,black,transparent,Arial][tr][tdwidth=1,black,transparent,top,left,100,5][size=87]SIGNATURE OF FIELD TRAINING MANAGER[/size]\n${ftm}[/td][/tr][/table2][/aligntable]\n\n`;
+  bbcode += `[aligntable=left,30,0,0,0,0,0][table2=1,black,transparent,Arial][tr][tdwidth=1,black,transparent,top,left,100,5][size=87]SIGNATURE OF FIELD TRAINING MANAGER[/size]\n${ftm}[/tr][/table2][/aligntable]\n\n`;
 
   bbcode += "[aligntable=right,0,0,0,0,0,0][center][font=Arial][size=110][b]Weekly Performance[/b][/size][/font][/center]\n";
   bbcode += "A continuation of unsatisfactory performance may result in termination.\n";
