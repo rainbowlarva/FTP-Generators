@@ -29,7 +29,7 @@ export function generateWeeklyBBCode() {
   bbcode += `[tdwidth=1,black,transparent,top,left,8,5][size=87]SERIAL NO.[/size]\n${ftmSerial}[/tdwidth][/tr]\n[/table2]\n\n`;
 
   bbcode += "[font=Arial][b]RATING INSTRUCTIONS: Use the following scale to summarize the probationary officer’s performance. A DOR comment must justify any (1), (2), or (4) rating. Use (N/O) if not observed.[/b][/font]\n";
-  bbcode += "  [b][u]BELOW STANDARD[/u][/b] - Inability to accomplish tasks.\n";
+  bbcode += "[list][b][u]BELOW STANDARD[/u][/b] - Inability to accomplish tasks.\n";
   bbcode += "(2) [b][u]IMPROVEMENT REQUIRED[/u][/b] - Progressing but below standard.\n";
   bbcode += "(3) [b][u]STANDARD[/u][/b] - Meets expectations.\n";
   bbcode += "(4) [b][u]ABOVE STANDARD[/u][/b] - Exceeds expectations.\n";
