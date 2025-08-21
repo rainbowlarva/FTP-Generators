@@ -16,7 +16,6 @@ export function generateDORBBCode() {
   const dorIncidentsTasks = getValue("dorIncidentsTasks");
   const dorBelowStandard = getValue("dorBelowStandard");
   const dorAboveStandard = getValue("dorAboveStandard");
-  const learningGoalsExplanation = getValue("dorLearningGoalsExplain");
   const dorRoleplayRemarks = getValue("dorRoleplayRemarks");
 
   let bbcode = "";
@@ -47,9 +46,6 @@ export function generateDORBBCode() {
 
   bbcode += "[font=Arial][b][size=110]ABOVE STANDARD PERFORMANCE[/size][/b][/font]\n\n";
   bbcode += `${dorAboveStandard || "Above standard performance details here"}\n\n`;
-
-  bbcode += "[font=Arial][b][size=110]LEARNING GOALS[/size][/b][/font]\n\n";
-  bbcode += `${learningGoalsExplanation || "Explain what you taught here."}\n\n`;
 
   bbcode += "[font=Arial][b][size=110](( ROLEPLAY REMARKS ))[/size][/b][/font]\n\n";
   bbcode += `[ooc]${dorRoleplayRemarks || "Remarks here"}[/ooc]\n\n`;
