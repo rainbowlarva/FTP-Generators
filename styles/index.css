@@ -54,8 +54,7 @@ a {
   border: none;
   border-radius: 18px;
   background: #1C1C1C;
-  width: 100%;
-  max-width: 956px;
+  max-width: 1300px;
   margin: 28px auto;
   padding: 20px;
     backdrop-filter: blur(12px);
