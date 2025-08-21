@@ -99,6 +99,7 @@ export async function saveReport(type) {
       incidents: getValue("dorIncidentsTasks"),
       belowStandard: getValue("dorBelowStandard"),
       aboveStandard: getValue("dorAboveStandard"),
+      learningGoals: getValue("dorLearningGoalsExplain"),
       roleplay: getValue("dorRoleplayRemarks"),
       ratings: {}
     };
@@ -222,6 +223,7 @@ export async function loadReport(reportMeta) {
     Object.assign(document.getElementById("dorIncidentsTasks"), { value: report.data.incidents });
     Object.assign(document.getElementById("dorBelowStandard"), { value: report.data.belowStandard });
     Object.assign(document.getElementById("dorAboveStandard"), { value: report.data.aboveStandard });
+    Object.assign(document.getElementById("dorLearningGoalsExplain"), { value: report.data.learningGoals });
     Object.assign(document.getElementById("dorRoleplayRemarks"), { value: report.data.roleplay });
     applyRating("dorRating", 17, report.data.ratings);
     document.getElementById("dorGenerator").style.display = "block";
